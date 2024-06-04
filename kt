@@ -1,3 +1,6 @@
+// Ajusta las rutas estáticas para servir los archivos desde src\public
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Agregar imagen del producto
 router.put('/upload', upload.single('image'), async (req, res) => {
     try {
@@ -11,8 +14,8 @@ router.put('/upload', upload.single('image'), async (req, res) => {
         return res.status(404).send('Product not found.');
       }
  
-      const filePath = `/public/images/${req.file.filename}`; // Ruta de la imagen
-      const thumbnailPath = `/public/thumbnails/${req.file.filename}`; // Ruta del thumbnail
+      const filePath = `/images/${req.file.filename}`; // Ruta de la imagen
+      const thumbnailPath = `/thumbnails/${req.file.filename}`; // Ruta del thumbnail
  
       // Crear thumbnail usando Sharp
       await sharp(req.file.path)
@@ -29,3 +32,4 @@ router.put('/upload', upload.single('image'), async (req, res) => {
       res.status(500).send('Error uploading image.');
     }
   });
+
