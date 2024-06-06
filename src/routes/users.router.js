@@ -6,8 +6,12 @@ const router = new Router()
 const User = require('../models/user.model');
 const {createHash, isValidPassword} = require('../utils/bcrypt')
 const passport = require('passport');
+const { getUsers } = require('../controllers/user.controller');
 
 /***************** Register Local*********************/
+
+router.get('/', getUsers)
+
 
 // Ruta para renderizar la vista de registro
 router.get('/register', (req, res) => {
