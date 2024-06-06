@@ -1,0 +1,38 @@
+<div class="container">
+  <h1>Registro</h1>
+  <div class="container register">
+    <form class="row g-3" action="/api/user/register" method="POST">
+      <div class="col-md-6">
+        <label for="username" class="form-label">UserName</label>
+        <input type="text" name="username" class="form-control" id="username" placeholder="Write your UserName">
+      </div>
+      <div class="col-md-6">
+        <label for="lastName" class="form-label">LastName</label>
+        <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Write your LastName">
+      </div>
+      <div class="col-md-6">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" name="email" class="form-control" id="email" placeholder="Email">
+      </div>
+      <div class="col-md-6">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+      </div>
+      <div class="col-md-6">
+        <label for="phone" class="form-label">Phone</label>
+        <input type="number" name="phone" class="form-control" id="phone" placeholder="Phone">
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Enviar</button>
+      </div>
+    </form>
+  </div>
+  {{#if user}}
+  <div class="mt-4">
+    <h2>Datos Ingresados</h2>
+    <p><strong>Email:</strong> {{user.email}}</p>
+    <p><strong>Username:</strong> {{user.username}}</p>
+    <p><strong>Phone:</strong> {{user.phone}}</p>
+  </div>
+  {{/if}}
+</div>

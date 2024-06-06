@@ -1,0 +1,17 @@
+    <h2>Enviar Email</h2>
+
+{{!-- <form id="emailForm" action="/api/mail/send" method="POST" class="form-inline">
+    <input type="emailUser" name="emailUser" id="emailUser" class="form-control mr-2" placeholder="Email" required>
+    <button id="sendEmailButton" type="submit" class="btn btn-primary">Enviar Correo</button>
+
+
+</form> --}}
+
+<form id="emailForm" class="mailbox">
+    <input type="email" name="emailUser" id="emailUser" class="form-control mr-2 mailinput" placeholder="Email" required>
+    <a href="/api/mail/send" id="sendEmailLink" class="btn btn-primary">Enviar correo</a>
+</form>
+
+
+
+<script src="/js/mail.js"></script>

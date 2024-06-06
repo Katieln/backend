@@ -1,0 +1,125 @@
+.caja{
+    height: 50vh;
+    overflow: auto;
+}
+
+.card {
+    width: 20%;
+    margin-bottom: 20px;
+    margin-right: 15px;
+}
+
+.card img {
+    height: 50%;
+    object-fit: cover; /* Esto asegurará que las imágenes se recorten para ajustarse */
+}
+
+.UserConnect{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.card-text {
+    font-size: 0.9rem; /* Tamaño de fuente para el texto */
+    margin-bottom: 0.3rem; /* Reducir el margen inferior */
+}
+.card-title {
+    font-size: 1.1rem; /* Tamaño de fuente para el título */
+    text-align: center; /* Centrar el texto horizontalmente */
+    margin-bottom: 0.5rem; /* Reducir el margen inferior */
+    background-color: rgb(244, 253, 255);
+    text-transform: uppercase;
+}
+
+.containerPr {
+    margin: 0 auto; /* Centralizar el contenedor */
+    padding: 0 15px; /* Reducir el relleno del contenedor */
+  }
+
+.loginGitHub{
+    background-color: rgb(105, 174, 31);
+    border-color: rgb(106, 146, 57);
+}
+
+.loginbox{
+    margin: 3rem;
+    padding: 3rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+
+}
+
+.mailbox{
+    margin: 3rem;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+   
+}
+
+.mailinput{
+    margin: 20px;
+}
+
+.respComprar{
+    background-color: rgb(207, 225, 253);
+    font-size: 20px;
+    text-align: center;
+    padding: 3px;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0;
+}
+
+
+.form-inline {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.form-inline .form-group {
+    margin-bottom: 0;
+}
+
+.form-inline .form-control {
+    width: auto;
+    margin-right: 0.5rem;
+}
+
+.form-inline .btn {
+    margin-right: 0.5rem;
+}
+
+.register{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login{
+    margin-top: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.conectedUserPr{
+    display: flex;
+    justify-content: space-between;
+}

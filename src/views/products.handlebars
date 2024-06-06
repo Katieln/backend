@@ -1,0 +1,45 @@
+{{!-- views/products.handlebars --}}
+<div class="container">
+  <div class="header-container">
+    <form id="login-form" class="form-inline">
+      <input type="email" id="email" class="form-control mr-2" placeholder="Email" required>
+      <input type="password" id="password" class="form-control mr-2" placeholder="Contraseña" required>
+      <button type="submit" class="btn btn-primary">Login local</button>
+      <input type="hidden" id="userId" name="userId" value="{{user._id}}">
+    </form>
+
+    <div >
+      <a href="/api/auth/github" id="loginGitHub" class="btn btn-primary loginGitHub">Login with GitHub</a>
+    </div>
+
+
+    {{#if user}}
+    <div class="mt-4">
+      <h2>Usuario Conectado</h2>
+      <p><strong>Email:</strong> {{user.email}}</p>
+    </div>
+    {{/if}}
+  </div>
+
+  <div id="error-message" class="mt-3 text-danger"></div>
+
+  <div id="UserConnect" class="UserConnect">
+    <h1 class="TitlePage">Products</h1>
+  </div>
+
+  <div id="messageContainer" class="respComprar"></div>
+
+
+
+  <div id="misprods" class="row"></div>
+</div>
+
+<script src="/js/products.js"></script>
+
+
+{{!-- <div class="container">
+  <div class="row" id="misprods">
+    <!-- Aquí se inyectarán las cards de los productos -->
+  </div>
+
+</div> --}}
