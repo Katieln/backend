@@ -6,6 +6,7 @@ const Cart = require('../models/cart.model');
 const Product = require('../models/product.model');
 const { createHash, isValidPassword } = require('../utils/bcrypt');
 const isAuthenticated = require('../middlewares/authMiddleware');
+const passport = require('passport')
 
 // products.router.js
 
@@ -13,7 +14,6 @@ const isAuthenticated = require('../middlewares/authMiddleware');
 router.get('/', (req, res) => {
     res.render('cart');
   });
-
 
 
 

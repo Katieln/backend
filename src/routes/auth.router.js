@@ -4,25 +4,55 @@ const passport = require('passport');
 const router = express.Router();
 const { profile, logout } = require('../controllers/auth.controller');
 
-router.post('/register', passport.authenticate('register', { 
-  failureRedirect: '/auth/failedregister' 
+// ************ Configurar rutas LocalStrtegy ************** //
+
+// Registro de usuarios local
+router.post('/register', passport.authenticate('register', {
+  successRedirect: '/api/prods/viewPr',
+  failureRedirect: '/api/auth/register',
+  failureFlash: true
 }), (req, res) => {
   res.send('Usuario registrado');
 });
 
-router.get('/failedregister', (req, res) => {
-  res.send('Registro fallido');
+// Ruta para renderizar la vista de registro
+router.get('/register', (req, res) => {
+  res.render('register');
 });
 
-router.post('/login', passport.authenticate('login', { 
-  failureRedirect: '/auth/failedlogin' 
+// Inicio de sesión local
+router.post('/login', passport.authenticate('login', {
+  successRedirect: '/',
+  failureRedirect: '/api/auth/login',
+  failureFlash: true
 }), (req, res) => {
   req.session.user = req.user.email;
   res.send('Usuario conectado');
 });
 
-router.get('/failedlogin', (req, res) => {
-  res.send('Inicio de sesión fallido');
+
+// vista de login
+router.get('/login', (req, res) => {
+  res.render('login', { user: req.session.user });
+});
+
+
+
+//************* Logout *************/
+
+router.get('/logout', (req, res) => {
+  req.logout((err) => {
+    if (err) { 
+      return next(err); 
+    }
+    req.session.destroy((err) => {
+      if (err) {
+        return next(err);
+      }
+      res.clearCookie('connect.sid'); 
+      res.redirect('/api/prods/viewPr'); 
+    });
+  });
 });
 
 // ************ Configurar rutas GITHUB ************** //
@@ -51,10 +81,7 @@ router.get('/github/callback',
   }
 );
 
- router.post('/register', passport.authenticate('register', { failureRedirect: '/register-failure' }),
-  (req, res) => {
-    res.redirect('/');
-  });
+
 
 
   router.get('/check-auth', (req, res) => {

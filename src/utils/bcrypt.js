@@ -1,14 +1,14 @@
 const bcrypt = require('bcrypt');
 
 const createHash = (password) => {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 };
 
-const isValidPassword = (plainPassword, hashedPassword) => {
-    if (!plainPassword || !hashedPassword) {
-        return false;
-    }
-    return bcrypt.compareSync(plainPassword, hashedPassword);
+const isValidPassword = (inputPassword, storedPassword) => {
+  return bcrypt.compareSync(inputPassword, storedPassword);
 };
 
-module.exports = { createHash, isValidPassword };
+module.exports = {
+  createHash,
+  isValidPassword
+};

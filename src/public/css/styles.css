@@ -14,13 +14,6 @@
     object-fit: cover; /* Esto asegurará que las imágenes se recorten para ajustarse */
 }
 
-.UserConnect{
-    display: flex;
-    flex-direction:row;
-    justify-content: space-around;
-    align-items: center;
-}
-
 .card-body {
     display: flex;
     flex-direction: column;
@@ -55,7 +48,17 @@
     justify-content: space-around;
     align-items: center;
 
+}
 
+.logout{
+    background-color: rgb(22, 42, 84);
+}
+
+.UserConnect{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .mailbox{

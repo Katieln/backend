@@ -40,8 +40,12 @@ router.post('/register', async (req, res) => {
 
     await newUser.save();
 
-
-    res.render('register', { user: { email, username, phone, lastName } });
+    req.login(newUser, (err) => {
+      if (err) {
+        return res.status(500).json({ error: 'Error al iniciar sesión después del registro' });
+      }
+      return res.render('register', { user: { email, username, phone, lastName } });
+    });
   } catch (error) {
     console.error('Error al registrar usuario:', error);
     res.status(500).json({ error: 'Error interno del servidor' });
@@ -52,53 +56,55 @@ router.post('/register', async (req, res) => {
 /***************** LOGIN Local *********************/
 
 
-// vista de login
-router.get('/login', (req, res) => {
-  res.render('login', { user: req.session.user });
-});
+// router.post('/login', passport.authenticate('local', {
+//   successRedirect: '/',
+//   failureRedirect: '/login',
+//   failureFlash: true
+// }));  
+
 
 // POST login
-router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+// router.post('/login', async (req, res) => {
+//   const { email, password } = req.body;
 
-  try {
+//   try {
      
-      const user = await User.findOne({ email });
+//       const user = await User.findOne({ email });
 
    
-      if (!user) {
-          return res.status(404).json({ error: 'Usuario no encontrado' });
-      }
+//       if (!user) {
+//           return res.status(404).json({ error: 'Usuario no encontrado' });
+//       }
 
      
-      if (!isValidPassword(password, user.password)) {
-          return res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
-      }
+//       if (!isValidPassword(password, user.password)) {
+//           return res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
+//       }
 
   
-      req.session.userId = user._id;
-      req.session.user = { email: user.email, username: user.username };
+//       req.session.userId = user._id;
+//       req.session.user = { email: user.email, username: user.username };
 
       
-      res.status(200).json({ message: 'Inicio de sesión exitoso', user });
+//       res.status(200).json({ message: 'Inicio de sesión exitoso', user });
 
-  } catch (error) {
-      console.error('Error al iniciar sesión:', error);
-      res.status(500).json({ error: 'Error interno del servidor' });
-  }
-});
-
-
+//   } catch (error) {
+//       console.error('Error al iniciar sesión:', error);
+//       res.status(500).json({ error: 'Error interno del servidor' });
+//   }
+// });
 
 
 
-// Middleware para proteger rutas
-function isAuthenticated(req, res, next) {
-  if (req.session.userId) {
-    return next();
-  }
-  res.redirect('/login');
-}
+
+
+// // Middleware para proteger rutas
+// function isAuthenticated(req, res, next) {
+//   if (req.session.userId) {
+//     return next();
+//   }
+//   res.redirect('/login');
+// }
 
 
 // app.get('/profile', isAuthenticated, async (req, res) => {
@@ -115,10 +121,10 @@ function isAuthenticated(req, res, next) {
 
 
 // envío del formulario de login
-router.post('/login1', (req, res) => {
-  const { email, password } = req.body;
-  res.render('login', { user: { email, password } });
-});
+// router.post('/login1', (req, res) => {
+//   const { email, password } = req.body;
+//   res.render('login', { user: { email, password } });
+// });
 
 
 
