@@ -96,21 +96,6 @@ router.put('/upload', upload.single('image'), async (req, res) => {
 
 
 
-// // Obtener todos los productos
-// router.get('/allPr', async (req, res) => {
-//     try {
-//         const allProducts = await Product.find();
-//         res.send({
-//             msg: 'Productos Encontrados',
-//             data: allProducts
-//         })
-          
-//     } catch (err) {
-//         res.status(500).send({
-//             error: err
-//         })}
-// });
-
 
 // Obtener todos los productos
 router.get('/allPr', async (req, res) => {

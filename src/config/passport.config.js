@@ -4,6 +4,17 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user.model');
 const { createHash, isValidPassword } = require('../utils/bcrypt');
+// const dotenv = require('dotenv');
+// const path = require('path');
+
+// const environment = process.env.NODE_ENV || 'DEVELOPMENT';
+
+// dotenv.config({
+//   path: environment === 'DEVELOPMENT' ? path.resolve(__dirname, '../.env') : path.resolve(__dirname, '../.env.production')
+// });
+
+// const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
+// const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
 
 
   //**************** LocalStrategy ***************//

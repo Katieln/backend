@@ -15,7 +15,19 @@ router.get('/', (req, res) => {
     res.render('cart');
   });
 
-
+// Ruta para renderizar el carrito
+router.get('/hola', isAuthenticated, async (req, res) => {
+    try {
+        const cart = await Cart.findOne({ userId: req.user._id }).populate('items.product'); // Asegúrate de tener el esquema correcto con la referencia a 'product'
+        if (!cart) {
+            return res.status(404).json({ error: 'Carrito no encontrado' });
+        }
+        res.render('cart', { cart: cart.items });
+    } catch (error) {
+        console.error('Error al obtener el carrito:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+});
 
 router.post('/add-to-cart', async (req, res) => {
     try {

@@ -2,6 +2,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
+const cors = require('cors')
 const db = require('./config/db.config');
 const mongoose = require('mongoose');
 const session = require('express-session')
@@ -46,6 +47,7 @@ app.use(passport.session())
 // Middleware
 app.use(express.static(__dirname + '/public'));
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 

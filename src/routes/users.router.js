@@ -10,7 +10,7 @@ const { getUsers } = require('../controllers/user.controller');
 
 /***************** Register Local*********************/
 
-router.get('/', getUsers)
+// router.get('/', getUsers)
 
 
 // Ruta para renderizar la vista de registro
