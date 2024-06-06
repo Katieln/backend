@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const boxprods = document.getElementById('misprods');
+    const boxprods = document.getElementById('misprodscart');
   
     async function fetchProducts() {
       try {

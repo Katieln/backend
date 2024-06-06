@@ -11,14 +11,27 @@ const passport = require('passport')
 // products.router.js
 
 // vista de cart
-router.get('/', (req, res) => {
-    res.render('cart');
-  });
+// router.get('/viewCart', (req, res) => {
+//     res.render('cart');
+//   });
+
+  // Obtener todos los productos
+router.get('/cartPrs', async (req, res) => {
+    try {
+        const allProducts = await Product.find();
+        res.json(allProducts); 
+    } catch (err) {
+        res.status(500).send({ error: err });
+    }
+});
+
+
 
 // Ruta para renderizar el carrito
-router.get('/hola', isAuthenticated, async (req, res) => {
+router.get('/viewCart', isAuthenticated, async (req, res) => {
     try {
-        const cart = await Cart.findOne({ userId: req.user._id }).populate('items.product'); // Asegúrate de tener el esquema correcto con la referencia a 'product'
+        const cart = await Cart.findOne({ userId: req.user._id }).populate('items.product'); 
+
         if (!cart) {
             return res.status(404).json({ error: 'Carrito no encontrado' });
         }
@@ -29,6 +42,8 @@ router.get('/hola', isAuthenticated, async (req, res) => {
     }
 });
 
+
+// Agregar productos al cart
 router.post('/add-to-cart', async (req, res) => {
     try {
         if (!req.isAuthenticated()) {
@@ -84,7 +99,7 @@ router.post('/add-to-cart', async (req, res) => {
 
 // Obtener los productos del carrito para un usuario 
 
-router.get('/ByUser/:userId', async (req, res) => {
+router.get('/ByUser/:userId', isAuthenticated, async (req, res) => {
     try {
         
         const userId = req.params.userId;
@@ -165,7 +180,7 @@ router.post('/pr', async (req, res) => {
 
 
 
-// Eliminar los productos del carrito de un usuario 
+// Eliminar todos los productos del carrito de un usuario 
 router.delete('/:userId', async (req, res) => {
     try {
         
