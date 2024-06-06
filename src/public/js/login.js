@@ -16,9 +16,9 @@ document.getElementById('login-form').addEventListener('submit', async (event) =
 
       if (response.ok) {
           const userData = await response.json();
-          // Limpiar cualquier mensaje de error previo
+        
           errorMessageElement.textContent = '';
-          // Redireccionar a la misma página para actualizar la vista
+         
           window.location.reload();
       } else {
           const errorData = await response.json();

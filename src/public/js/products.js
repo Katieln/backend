@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
 
   
-    // Mostrar datos del usuario si está almacenado en el almacenamiento local
+    // Mostrar datos del usuario en pantalla
     const storedUser = JSON.parse(localStorage.getItem('user'));
     if (storedUser) {
       const userContainer = document.createElement('div');

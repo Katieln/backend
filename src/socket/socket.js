@@ -18,7 +18,7 @@ io.on('connection', (socket)=>{
       user : data.username,
       message: data.message
     })
-    //Funcion que guarde en la base de datos
+
   })
 })
 

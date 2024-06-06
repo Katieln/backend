@@ -1,6 +1,6 @@
-const socket = io() // encender el socket aqui
+const socket = io() 
 
-//el evento que va a escuchar es 'wellcome' y data es el arguemnto q viene del servidor 
+
 socket.on('wellcome', (data)=>{
   console.log(data)
 })

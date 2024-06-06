@@ -5,10 +5,10 @@ const path = require('path');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, '../public/images')); // Guarda las imágenes en la carpeta 'images'
+    cb(null, path.join(__dirname, '../public/images')); 
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname); // Nombra las imágenes con un timestamp y el nombre original del archivo
+    cb(null, Date.now() + '-' + file.originalname); 
   }
 });
 

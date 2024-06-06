@@ -9,9 +9,9 @@ const path = require('path');
 const User = require('../models/user.model');
 const {createHash, isValidPassword} = require('../utils/bcrypt')
 
-// Ruta para renderizar la vista de productos
+// vista de productos
 router.get('/viewPr', (req, res) => {
-    res.render('products'); // Asegúrate de que la vista 'products' esté en el directorio correcto
+    res.render('products');
 });
 
 
@@ -19,24 +19,23 @@ router.post('/viewPr', async (req, res) => {
     const { email, password } = req.body;
   
     try {
-        // Buscar el usuario por email
+     
         const user = await User.findOne({ email });
   
-        // Si el usuario no existe, devolver un error
+  
         if (!user) {
             return res.status(404).json({ error: 'Usuario no encontrado' });
         }
   
-        // Verificar la contraseña
+  
         if (!isValidPassword(password, user.password)) {
             return res.status(401).json({ error: 'Contraseña incorrecta' });
         }
   
-        // Iniciar sesión
+
         req.session.userId = user._id;
         req.session.user = { email: user.email, username: user.username };
-  
-        // Enviar una respuesta exitosa con los datos del usuario
+
         res.status(200).json({ message: 'Inicio de sesión exitoso', user });
   
     } catch (error) {
@@ -75,16 +74,16 @@ router.put('/upload', upload.single('image'), async (req, res) => {
         return res.status(404).send('Product not found.');
       }
  
-      const filePath = `/images/${req.file.filename}`; // Ruta de la imagen
-      const thumbnailPath = `/thumbnails/${req.file.filename}`; // Ruta del thumbnail
+      const filePath = `/images/${req.file.filename}`;
+      const thumbnailPath = `/thumbnails/${req.file.filename}`; 
  
-      // Crear thumbnail usando Sharp
+
       await sharp(req.file.path)
         .resize(150, 150)
         .toFile(path.join(__dirname, '../public/thumbnails', req.file.filename));
  
-      product.image = filePath; // Actualiza el campo 'image' con la ruta de la imagen
-      product.thumbnail = thumbnailPath; // Actualiza el campo 'thumbnail' con la ruta del thumbnail
+      product.image = filePath; 
+      product.thumbnail = thumbnailPath; 
       await product.save();
  
       res.send('Image and thumbnail uploaded and product updated successfully.');
@@ -117,7 +116,7 @@ router.put('/upload', upload.single('image'), async (req, res) => {
 router.get('/allPr', async (req, res) => {
     try {
         const allProducts = await Product.find();
-        res.json(allProducts); // Devuelve los productos en formato JSON
+        res.json(allProducts); 
     } catch (err) {
         res.status(500).send({ error: err });
     }
@@ -169,10 +168,8 @@ router.delete('/prById/:id', async (req, res) => {
 router.put('/prById/:id', async (req, res) => {
     try {
         const productId = req.params.id;
-        const updatedData = req.body; // Los datos actualizados se pasan en el cuerpo de la solicitud
+        const updatedData = req.body; 
 
-        // Usamos findByIdAndUpdate para buscar y actualizar el producto por su ID
-        // { new: true } devuelve el producto actualizado
         const product = await Product.findByIdAndUpdate(productId, updatedData, { new: true });
 
         if (!product) {

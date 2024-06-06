@@ -107,7 +107,7 @@ passport.deserializeUser(async (sessionData, done) => {
     if (user) {
       done(null, { ...user.toObject(), ...sessionData });
     } else {
-      done(null, sessionData);  // No se encontró el usuario, pero aún devolvemos sessionData
+      done(null, sessionData);  
     }
   } catch (err) {
     done(err, false);

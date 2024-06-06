@@ -14,33 +14,33 @@ router.get('/register', (req, res) => {
   res.render('register');
 });
 
-// Registrar un nuevo usuario y mostrar los datos ingresados
+
 router.post('/register', async (req, res) => {
   try {
     const { username, email, password, phone, lastName } = req.body;
 
     const method = 'local';
 
-    // Verificar si ya existe un usuario con el mismo nombre de usuario o correo electrónico
+  
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
 
     if (existingUser) {
       return res.status(400).json({ error: 'El nombre de usuario o correo electrónico ya está en uso' });
     }
 
-    // Crear un nuevo usuario
+
     const newUser = new User({
       method,
       username,
       email,
-      password: createHash(password), // Encriptar la contraseña aquí
+      password: createHash(password), 
       phone,
       lastName
     });
 
     await newUser.save();
 
-    // Renderizar la vista con los datos del usuario
+
     res.render('register', { user: { email, username, phone, lastName } });
   } catch (error) {
     console.error('Error al registrar usuario:', error);
@@ -52,7 +52,7 @@ router.post('/register', async (req, res) => {
 /***************** LOGIN Local *********************/
 
 
-// Ruta para renderizar la vista de login
+// vista de login
 router.get('/login', (req, res) => {
   res.render('login', { user: req.session.user });
 });
@@ -62,24 +62,24 @@ router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-      // Buscar el usuario por email
+     
       const user = await User.findOne({ email });
 
-      // Si el usuario no existe, devolver un error
+   
       if (!user) {
           return res.status(404).json({ error: 'Usuario no encontrado' });
       }
 
-      // Verificar la contraseña
+     
       if (!isValidPassword(password, user.password)) {
           return res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
       }
 
-      // Iniciar sesión
+  
       req.session.userId = user._id;
       req.session.user = { email: user.email, username: user.username };
 
-      // Enviar una respuesta exitosa con los datos del usuario
+      
       res.status(200).json({ message: 'Inicio de sesión exitoso', user });
 
   } catch (error) {
@@ -100,7 +100,7 @@ function isAuthenticated(req, res, next) {
   res.redirect('/login');
 }
 
-// Ruta protegida que muestra los datos del usuario
+
 // app.get('/profile', isAuthenticated, async (req, res) => {
 //   try {
 //     const userId = req.session.userId;
@@ -114,7 +114,7 @@ function isAuthenticated(req, res, next) {
 
 
 
-// Ruta para manejar el envío del formulario de login
+// envío del formulario de login
 router.post('/login1', (req, res) => {
   const { email, password } = req.body;
   res.render('login', { user: { email, password } });
@@ -150,9 +150,9 @@ module.exports = router;
 
 
 
-// Otros endpoints para la gestión de usuarios, como inicio de sesión, actualización de perfil, etc.
+/// *******************************************************************///
 
-// // // Ruta para registrar un nuevo usuario
+// registrar un nuevo usuario
 // router.post('/registerH', async (req, res) => {
 //     try {
 //         let userNew = req.body;
