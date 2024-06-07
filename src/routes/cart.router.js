@@ -83,7 +83,7 @@ router.post('/add-to-cart', async (req, res) => {
   
   
 router.get('/viewPr', (req, res) => {
-    res.render('cart');
+    res.render('cart')
 });
 
 

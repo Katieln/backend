@@ -4,7 +4,9 @@
 <div class="ontainer mt-5">
         <h1>Carrito de Compras</h1>
         <div id="cartItems" class="row"></div>
-        <h2>Total: $ <span id="cartTotal"></span></h2>
-</div>
-
-  <script src="/js/cart.js"></script>
+        <div>Total: $<span id="cartTotal"></span></div>
+        <script>
+                // El ID del usuario se inserta en un elemento de datos
+                const userId = '{{userId}}';
+        </script>
+        <script src="/js/cart.js"></script>
