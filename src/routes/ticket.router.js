@@ -1,41 +1,49 @@
-// const express = require('express');
-// const passport = require('passport');
-// const router = express.Router(); // Aquí se crea el router correctamente
-// const Cart = require('../models/cart.model');
-// const Ticket = require('../models/ticket.model');
-// const { isAuthenticated } = require('../middlewares/authMiddleware');
+const express = require('express');
+const passport = require('passport');
+const router = express.Router(); // Aquí se crea el router correctamente
+const Cart = require('../models/cart.model');
+const Ticket = require('../models/ticket.model');
+const { isAuthenticated } = require('../middlewares/authMiddleware');
+const User = require('../models/user.model')
 
-// router.post('/checkout', isAuthenticated, async (req, res) => {
+// router.get('/ticket/:userId', isAuthenticated, async (req, res) => {
 //     try {
-//         const userId = req.user._id;
+//         const userId = req.params.userId;
 
-//         // Obtener el carrito del usuario
-//         const cart = await Cart.findOne({ userId });
+//         const cart = await Cart.findOne({ userId }).populate('items.product').populate('userId');
 
 //         if (!cart) {
 //             return res.status(404).json({ msg: 'Carrito no encontrado' });
 //         }
 
-//         // Crear un nuevo ticket con los productos del carrito
-//         const ticketData = {
-//             userId: cart.userId,
-//             products: cart.items.map(item => ({
-//                 productId: item.product,
-//                 quantity: item.quantity
-//             })),
-//             total: calcularTotal(cart.items) // Asegúrate de tener la función calcularTotal definida
-//         };
+//         const user = await User.findById(userId);
+//         if (!user) {
+//             return res.status(404).json({ msg: 'Usuario no encontrado' });
+//         }
 
-//         const newTicket = await Ticket.create(ticketData);
+//         const productsInCart = cart.items.map(item => ({
+//             product: item.product ? item.product.title : "Producto no encontrado",
+//             quantity: item.quantity,
+//             price: item.price,
+//             totalPrice: item.totalPrice,
+//             image: item.product ? item.product.image : "No image"
+//         }));
 
-//         // Eliminar el carrito una vez que se haya creado el ticket
-//         await Cart.findOneAndDelete({ userId });
+//         const cartTotal = cart.total;
 
-//         res.json({ msg: 'Ticket creado exitosamente', ticket: newTicket });
+//         res.json({
+//             user: {
+//                 name: user.name,
+//                 email: user.email
+//             },
+//             products: productsInCart,
+//             total: cartTotal
+//         });
 //     } catch (err) {
 //         console.error(err);
-//         res.status(500).json({ msg: 'Error al crear el ticket' });
+//         res.status(500).json({ msg: 'Error al obtener productos del carrito' });
 //     }
 // });
 
-// module.exports = router;
+
+module.exports = router;

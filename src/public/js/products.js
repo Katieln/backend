@@ -1,4 +1,4 @@
-///************************* Mostrar productos pantalla *************************///
+///********* Mostrar productos pantalla *********///
 
 document.addEventListener('DOMContentLoaded', function() {
     const boxprods = document.getElementById('misprods');

@@ -50,6 +50,7 @@ router.post('/add-to-cart', async (req, res) => {
                     title: product.title,
                     price: product.price,
                     quantity: 1,
+                    image: product.image,
                     totalPrice: product.price }]
             });
         } else {
@@ -62,6 +63,7 @@ router.post('/add-to-cart', async (req, res) => {
                     product: productId,
                     title: product.title,
                     quantity: 1,
+                    image: product.image,
                     price: product.price,
                     totalPrice: product.price });
             }
@@ -80,7 +82,10 @@ router.post('/add-to-cart', async (req, res) => {
 
   
   
-  
+router.get('/viewPr', (req, res) => {
+    res.render('cart');
+});
+
 
 /*************************************************************/
 
@@ -88,24 +93,25 @@ router.post('/add-to-cart', async (req, res) => {
 
 router.get('/ByUser/:userId', isAuthenticated, async (req, res) => {
     try {
-        
         const userId = req.params.userId;
 
-       
         const cart = await Cart.findOne({ userId }).populate('items.product');
 
         if (!cart) {
             return res.status(404).json({ msg: 'Carrito no encontrado' });
         }
 
-     
         const productsInCart = cart.items.map(item => ({
             product: item.product ? item.product.title : "Producto no encontrado",
             quantity: item.quantity,
-            price: item.price
+            image: item.image,
+            price: item.price,
+            totalPrice: item.price * item.quantity
         }));
 
-        res.json(productsInCart);
+        const cartTotal = cart.total;
+
+        res.json({ products: productsInCart, total: cartTotal });
     } catch (err) {
         console.error(err);
         res.status(500).json({ msg: 'Error al obtener productos del carrito' });
