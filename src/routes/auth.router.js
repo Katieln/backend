@@ -34,9 +34,9 @@ router.post('/login', passport.authenticate('login', {
 
 // vista de login
 router.get('/login', (req, res) => {
-  res.render('login', { user: req.session.user });
+  const userEmail = req.isAuthenticated() ? req.user.email : 'No conectado';
+  res.render('login', { userEmail });
 });
-
 
 
 //************* Logout *************/

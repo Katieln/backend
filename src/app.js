@@ -18,8 +18,6 @@ const GitHubStrategy = require('passport-github2').Strategy;
 const multer = require('multer')
 const path = require('path');
 const nodemailer = require('nodemailer')
-const attachUserEmail = require('../src/middlewares/loggingMiddleware');
-
 
 const http = require('http');
 const server = http.createServer(app);
@@ -54,7 +52,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
-app.use(attachUserEmail);
+
 
 // Middleware para configurar los mensajes flash
 app.use((req, res, next) => {
@@ -83,7 +81,6 @@ app.use('/public/thumbnails', express.static('thumbnails'));
 const mongo = require('mongoose')
 const productsRouter = require('./routes/products.router');
 const cartRouter = require('./routes/cart.router');
-const userRouter = require('./routes/users.router');
 const chatRouter = require('./routes/chat.router');
 const sessionsrouter = require('./routes/sessions.router')
 const authRoutes = require('./routes/auth.router');
@@ -92,7 +89,6 @@ const mailRouter = require('./routes/mail.router')
 // Rutas
 app.use('/api/prods', productsRouter);
 app.use('/api/cart', cartRouter);
-app.use('/api/user', userRouter)
 app.use('/api/chat', chatRouter)
 app.use('/api/sessions', sessionsrouter)
 app.use('/api/auth', authRoutes);

@@ -28,23 +28,23 @@ const footer = document.getElementById('footer');
 
 // Función para obtener el email del usuario conectado
 
-function getUserEmail() {
-  fetch('/api/auth/user')
-    .then(response => response.json())
-    .then(data => {
-      if (data.user) {
-        const userEmail = data.user.email;
-        // Mostrar el email en el footer
-        footer.textContent = `Usuario conectado: ${userEmail}`;
-      } else {
-        footer.textContent = 'Usuario no conectado';
-      }
-    })
-    .catch(error => {
-      console.error('Error al obtener el usuario conectado:', error);
-      footer.textContent = 'Error al obtener el usuario conectado';
-    });
-}
+// function getUserEmail() {
+//   fetch('/api/auth/user')
+//     .then(response => response.json())
+//     .then(data => {
+//       if (data.user) {
+//         const userEmail = data.user.email;
+//         // Mostrar el email en el footer
+//         footer.textContent = `Usuario conectado: ${userEmail}`;
+//       } else {
+//         footer.textContent = 'Usuario no conectado';
+//       }
+//     })
+//     .catch(error => {
+//       console.error('Error al obtener el usuario conectado:', error);
+//       footer.textContent = 'Error al obtener el usuario conectado';
+//     });
+// }
 
-// Llamar a la función al cargar la página
-getUserEmail();
+// // Llamar a la función al cargar la página
+// getUserEmail();
