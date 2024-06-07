@@ -65,19 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
   
-
-  
-    // // Mostrar datos del usuario en pantalla
-    // const storedUser = JSON.parse(localStorage.getItem('user'));
-    // if (storedUser) {
-    //   const userContainer = document.createElement('div');
-    //   userContainer.classList.add('mt-4');
-    //   userContainer.innerHTML = `
-    //     <h2>Usuario Conectado</h2>
-    //     <p><strong>Email:</strong> ${storedUser.email}</p>
-    //   `;
-    //   document.querySelector('.UserConnect').appendChild(userContainer);
-    // }
   
     fetchProducts();
   });

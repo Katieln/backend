@@ -36,6 +36,15 @@
     padding: 0 15px; /* Reducir el relleno del contenedor */
   }
 
+.footer{
+    background-color: rgba(104, 167, 255, 0.256);
+    position:fixed;
+    bottom: 0;
+    right: 0;
+    padding: 1rem;
+}
+
+
 .loginGitHub{
     background-color: rgb(105, 174, 31);
     border-color: rgb(106, 146, 57);

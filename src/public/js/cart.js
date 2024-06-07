@@ -31,3 +31,17 @@ document.addEventListener('DOMContentLoaded', function() {
       fetchProducts();
 
 })
+
+document.addEventListener('DOMContentLoaded', () => {
+  fetch('/api/auth/user') // Asegúrate de tener una ruta que devuelva la información del usuario actual
+    .then(response => response.json())
+    .then(user => {
+      if (user && user._id) {
+        const cartLink = document.getElementById('cart-link');
+        cartLink.href = `/cart/ByUser/${user._id}`;
+      }
+    })
+    .catch(err => {
+      console.error('Error al obtener el usuario:', err);
+    });
+});

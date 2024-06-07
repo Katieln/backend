@@ -15,17 +15,6 @@ const passport = require('passport')
 //     res.render('cart');
 //   });
 
-  // Obtener todos los productos
-router.get('/cartPrs', async (req, res) => {
-    try {
-        const allProducts = await Product.find();
-        res.json(allProducts); 
-    } catch (err) {
-        res.status(500).send({ error: err });
-    }
-});
-
-
 
 // Ruta para renderizar el carrito
 router.get('/viewCart', isAuthenticated, async (req, res) => {

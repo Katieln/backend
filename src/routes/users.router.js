@@ -7,6 +7,25 @@ const User = require('../models/user.model');
 const {createHash, isValidPassword} = require('../utils/bcrypt')
 const passport = require('passport');
 const { getUsers } = require('../controllers/user.controller');
+const { isAuthenticated } = require('../middlewares/authMiddleware');
+
+// Incluir el email del usuario en todas las respuestas
+router.get('/', (req, res) => {
+  res.render('index', { userEmail: res.locals.userEmail });
+});
+
+// Otros manejadores de rutas...
+
+// Incluir el email del usuario en el footer
+router.get('/footer', (req, res) => {
+  res.render('footer', { userEmail: res.locals.userEmail });
+});
+
+// Ruta para obtener información del usuario actual
+// router.get('/user', isAuthenticated, (req, res) => {
+//   res.json(req.user);
+// });
+
 
 /***************** Register Local*********************/
 
@@ -14,47 +33,47 @@ const { getUsers } = require('../controllers/user.controller');
 
 
 // Ruta para renderizar la vista de registro
-router.get('/register', (req, res) => {
-  res.render('register');
-});
+// router.get('/register', (req, res) => {
+//   res.render('register');
+// });
 
 
-router.post('/register', async (req, res) => {
-  try {
-    const { username, email, password, phone, lastName } = req.body;
+// router.post('/register', async (req, res) => {
+//   try {
+//     const { username, email, password, phone, lastName } = req.body;
 
-    const method = 'local';
+//     const method = 'local';
 
   
-    const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+//     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
 
-    if (existingUser) {
-      return res.status(400).json({ error: 'El nombre de usuario o correo electrónico ya está en uso' });
-    }
+//     if (existingUser) {
+//       return res.status(400).json({ error: 'El nombre de usuario o correo electrónico ya está en uso' });
+//     }
 
 
-    const newUser = new User({
-      method,
-      username,
-      email,
-      password: createHash(password), 
-      phone,
-      lastName
-    });
+//     const newUser = new User({
+//       method,
+//       username,
+//       email,
+//       password: createHash(password), 
+//       phone,
+//       lastName
+//     });
 
-    await newUser.save();
+//     await newUser.save();
 
-    req.login(newUser, (err) => {
-      if (err) {
-        return res.status(500).json({ error: 'Error al iniciar sesión después del registro' });
-      }
-      return res.render('register', { user: { email, username, phone, lastName } });
-    });
-  } catch (error) {
-    console.error('Error al registrar usuario:', error);
-    res.status(500).json({ error: 'Error interno del servidor' });
-  }
-});
+//     req.login(newUser, (err) => {
+//       if (err) {
+//         return res.status(500).json({ error: 'Error al iniciar sesión después del registro' });
+//       }
+//       return res.render('register', { user: { email, username, phone, lastName } });
+//     });
+//   } catch (error) {
+//     console.error('Error al registrar usuario:', error);
+//     res.status(500).json({ error: 'Error interno del servidor' });
+//   }
+// });
 
 
 /***************** LOGIN Local *********************/

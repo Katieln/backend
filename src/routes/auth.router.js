@@ -3,6 +3,7 @@ const express = require('express');
 const passport = require('passport');
 const router = express.Router();
 const { profile, logout } = require('../controllers/auth.controller');
+const { isAuthenticated } = require('../middlewares/authMiddleware');
 
 // ************ Configurar rutas LocalStrtegy ************** //
 
@@ -23,7 +24,7 @@ router.get('/register', (req, res) => {
 // Inicio de sesión local
 router.post('/login', passport.authenticate('login', {
   successRedirect: '/api/prods/viewPr',
-  failureRedirect: 'api/auth/login',
+  failureRedirect: '/api/auth/login',
   failureFlash: true
 }), (req, res) => {
   req.session.user = req.user;
@@ -51,7 +52,7 @@ router.get('/logout', (req, res, next) => {
         return next(err);
       }
 
-      res.clearCookie('connect.sid', { path: '/' }); // Asegúrate de que la ruta es correcta
+      res.clearCookie('connect.sid', { path: '/' }); 
 
       res.redirect('/api/prods/viewPr');
     });

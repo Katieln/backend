@@ -1,4 +1,6 @@
 // app.js
+// require('events').EventEmitter.defaultMaxListeners = 15;
+
 require('dotenv').config();
 const express = require('express');
 const app = express();
@@ -16,6 +18,7 @@ const GitHubStrategy = require('passport-github2').Strategy;
 const multer = require('multer')
 const path = require('path');
 const nodemailer = require('nodemailer')
+const attachUserEmail = require('../src/middlewares/loggingMiddleware');
 
 
 const http = require('http');
@@ -51,6 +54,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
+app.use(attachUserEmail);
 
 // Middleware para configurar los mensajes flash
 app.use((req, res, next) => {
