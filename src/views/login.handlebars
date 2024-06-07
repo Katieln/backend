@@ -1,7 +1,7 @@
 <div class="container mt-5">
     <h1 class="text-center">Login</h1>
     <div class="login">
-        <form id="login-form" class="form-inline">
+        <form id="login-form" class="form-inline" action="/api/auth/login" method="POST">
             <input type="email" name="email" id="email" class="form-control mr-2" placeholder="Email" required>
             <input type="password" name="password" id="password" class="form-control mr-2" placeholder="Contraseña"
                 required>

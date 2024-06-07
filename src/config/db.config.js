@@ -1,4 +1,4 @@
-// db.js
+// ***** conexion a mongoDb *******//
 const mongoose = require('mongoose');
 
 module.exports = {

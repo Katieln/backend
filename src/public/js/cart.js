@@ -1,3 +1,4 @@
+//******** renderizar prods cart ********//
 document.addEventListener('DOMContentLoaded', function() {
     const boxprods = document.getElementById('misprodscart');
   

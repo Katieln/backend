@@ -2,7 +2,8 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const cors = require('cors')
+const cors = require('cors');
+const flash = require('connect-flash');
 const db = require('./config/db.config');
 const mongoose = require('mongoose');
 const session = require('express-session')
@@ -31,6 +32,7 @@ app.use(session({
   saveUninitialized: false,
   cookie: {
     maxAge: 1000 * 60 * 60 * 24, // 1 día
+    path: '/',
     secure: false, // true en producción si usas HTTPS
     httpOnly: true,
   },
@@ -42,13 +44,20 @@ initializePassport()
 
 app.use(passport.initialize())
 app.use(passport.session())
-
+app.use(flash());
 
 // Middleware
 app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
+
+// Middleware para configurar los mensajes flash
+app.use((req, res, next) => {
+  res.locals.success_messages = req.flash('success');
+  res.locals.error_messages = req.flash('error');
+  next();
+});
 
 
 //Views Engine require

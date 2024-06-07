@@ -22,12 +22,12 @@ router.get('/register', (req, res) => {
 
 // Inicio de sesión local
 router.post('/login', passport.authenticate('login', {
-  successRedirect: '/',
-  failureRedirect: '/api/auth/login',
+  successRedirect: '/api/prods/viewPr',
+  failureRedirect: 'api/auth/login',
   failureFlash: true
 }), (req, res) => {
-  req.session.user = req.user.email;
-  res.send('Usuario conectado');
+  req.session.user = req.user;
+  res.json({ user: req.user });
 });
 
 
@@ -40,20 +40,24 @@ router.get('/login', (req, res) => {
 
 //************* Logout *************/
 
-router.get('/logout', (req, res) => {
+router.get('/logout', (req, res, next) => {
   req.logout((err) => {
     if (err) { 
       return next(err); 
     }
+
     req.session.destroy((err) => {
       if (err) {
         return next(err);
       }
-      res.clearCookie('connect.sid'); 
-      res.redirect('/api/prods/viewPr'); 
+
+      res.clearCookie('connect.sid', { path: '/' }); // Asegúrate de que la ruta es correcta
+
+      res.redirect('/api/prods/viewPr');
     });
   });
 });
+
 
 // ************ Configurar rutas GITHUB ************** //
 

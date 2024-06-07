@@ -1,4 +1,4 @@
-// middlewares/authMiddleware.js
+// middleware autenticacion /authMiddleware.js
 
 function isAuthenticated(req, res, next) {
   if (!req.isAuthenticated()) {
@@ -12,6 +12,6 @@ function isAuthenticated(req, res, next) {
   }
 
   next();
-};
+}
 
 module.exports = isAuthenticated;

@@ -1,7 +1,7 @@
 {{!-- views/products.handlebars --}}
 <div class="container">
   <div class="header-container">
-    <form action="/auth/login" method="POST" id="login-form" class="form-inline">
+    <form action="/api/auth/login" method="POST" id="login-form" class="form-inline">
       <input type="email" id="email" class="form-control mr-2" placeholder="Email" required>
       <input type="password" id="password" class="form-control mr-2" placeholder="Contraseña" required>
       <button type="submit" class="btn btn-primary">Login local</button>
@@ -36,11 +36,3 @@
 
 <script src="/js/products.js"></script>
 <script src="/js/login.js"></script>
-
-
-{{!-- <div class="container">
-  <div class="row" id="misprods">
-    <!-- Aquí se inyectarán las cards de los productos -->
-  </div>
-
-</div> --}}

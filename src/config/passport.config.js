@@ -1,9 +1,11 @@
-// const passport = require('passport');
+//** config localStrategy y GitHubStrategy **//
+
 const GitHubStrategy = require('passport-github2').Strategy;
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user.model');
 const { createHash, isValidPassword } = require('../utils/bcrypt');
+
 // const dotenv = require('dotenv');
 // const path = require('path');
 
@@ -45,11 +47,12 @@ const initializePassport = () => {
     }
   ));
 
+
   passport.use('login', new LocalStrategy(
     { usernameField: 'email' },
     async (username, password, done) => {
       try {
-        let user = await User.findOne({ email: username });
+        const user = await User.findOne({ email: username });
         if (!user) {
           return done(null, false, { message: 'Usuario no encontrado' });
         }
@@ -58,7 +61,7 @@ const initializePassport = () => {
         }
         return done(null, user);
       } catch (err) {
-        return done(err, false, { message: 'Error al autenticar usuario' });
+        return done(err);
       }
     }
   ));

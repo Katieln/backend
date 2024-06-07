@@ -1,3 +1,4 @@
+//******** mail *******//
 document.addEventListener("DOMContentLoaded", function () {
     const sendEmailLink = document.getElementById("sendEmailLink");
     const emailUser = document.getElementById("emailUser").value;
