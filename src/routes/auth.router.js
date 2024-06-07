@@ -1,7 +1,8 @@
 // routes/auth.routes.js
 const express = require('express');
 const passport = require('passport');
-const router = express.Router();
+const {Router} = express
+const router = new Router()
 const { profile, logout } = require('../controllers/auth.controller');
 const { isAuthenticated } = require('../middlewares/authMiddleware');
 

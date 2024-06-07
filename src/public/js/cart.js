@@ -1,6 +1,6 @@
 //******** renderizar prods cart ********//
 document.addEventListener('DOMContentLoaded', function() {
-    const boxprods = document.getElementById('misprodscart');
+    const boxprodscart = document.getElementById('prodscart');
   
     async function fetchProducts() {
       try {
@@ -31,6 +31,8 @@ document.addEventListener('DOMContentLoaded', function() {
       fetchProducts();
 
 })
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
   fetch('/api/auth/user') // Asegúrate de tener una ruta que devuelva la información del usuario actual

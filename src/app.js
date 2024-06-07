@@ -82,9 +82,10 @@ const mongo = require('mongoose')
 const productsRouter = require('./routes/products.router');
 const cartRouter = require('./routes/cart.router');
 const chatRouter = require('./routes/chat.router');
-const sessionsrouter = require('./routes/sessions.router')
+const sessionsrouter = require('./routes/sessions.router');
 const authRoutes = require('./routes/auth.router');
-const mailRouter = require('./routes/mail.router')
+const mailRouter = require('./routes/mail.router');
+const ticketRouter = require('./routes/ticket.router')
 
 // Rutas
 app.use('/api/prods', productsRouter);
@@ -93,7 +94,7 @@ app.use('/api/chat', chatRouter)
 app.use('/api/sessions', sessionsrouter)
 app.use('/api/auth', authRoutes);
 app.use('/api/mail', mailRouter);
-
+// app.use('/api/ticket', ticketRouter);
 
 //Socket import
 const {Server} = require('socket.io')

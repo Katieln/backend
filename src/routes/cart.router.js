@@ -17,22 +17,6 @@ const passport = require('passport')
 
 
 // Ruta para renderizar el carrito
-router.get('/viewCart', isAuthenticated, async (req, res) => {
-    try {
-        const cart = await Cart.findOne({ userId: req.user._id }).populate('items.product'); 
-
-        if (!cart) {
-            return res.status(404).json({ error: 'Carrito no encontrado' });
-        }
-        res.render('cart', { cart: cart.items });
-    } catch (error) {
-        console.error('Error al obtener el carrito:', error);
-        res.status(500).json({ error: 'Error interno del servidor' });
-    }
-});
-
-
-// Agregar productos al cart
 router.post('/add-to-cart', async (req, res) => {
     try {
         if (!req.isAuthenticated()) {
@@ -61,16 +45,30 @@ router.post('/add-to-cart', async (req, res) => {
                 method: userMethod,
                 userId: userId,
                 userEmail: userEmail,
-                items: [{ product: productId, title: product.title, quantity: 1 }]
+                items: [{ 
+                    product: productId, 
+                    title: product.title,
+                    price: product.price,
+                    quantity: 1,
+                    totalPrice: product.price }]
             });
         } else {
             const existingItem = cart.items.find(item => item.product.equals(productId));
             if (existingItem) {
                 existingItem.quantity += 1;
+                existingItem.totalPrice += product.price; // Sumar al precio total por producto
             } else {
-                cart.items.push({ product: productId, title: product.title, quantity: 1 });
+                cart.items.push({
+                    product: productId,
+                    title: product.title,
+                    quantity: 1,
+                    price: product.price,
+                    totalPrice: product.price });
             }
         }
+
+        // Actualizar el precio total del carrito
+        cart.total = cart.items.reduce((total, item) => total + (item.price * item.quantity), 0);
 
         await cart.save();
         res.json({ message: 'Producto agregado correctamente al carrito' });
@@ -103,7 +101,8 @@ router.get('/ByUser/:userId', isAuthenticated, async (req, res) => {
      
         const productsInCart = cart.items.map(item => ({
             product: item.product ? item.product.title : "Producto no encontrado",
-            quantity: item.quantity
+            quantity: item.quantity,
+            price: item.price
         }));
 
         res.json(productsInCart);
@@ -114,6 +113,27 @@ router.get('/ByUser/:userId', isAuthenticated, async (req, res) => {
 });
 
 
+router.get('/:cid', isAuthenticated, async (req, res) => {
+    try {
+        const cartId = req.params.cid;
+
+        const cart = await Cart.findOne({ _id: cartId }).populate('items.product');
+
+        if (!cart) {
+            return res.status(404).json({ msg: 'Carrito no encontrado' });
+        }
+
+        const productsInCart = cart.items.map(item => ({
+            product: item.product ? item.product.title : "Producto no encontrado",
+            quantity: item.quantity
+        }));
+
+        res.json(productsInCart);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ msg: 'Error al obtener productos del carrito' });
+    }
+});
 /*************************************************************/
 
 // Agregar producto al carrito
