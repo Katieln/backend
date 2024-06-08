@@ -1,23 +1,31 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // Supongamos que obtienes el userId de alguna manera, por ejemplo, de una variable global
-  const userId = req.user._id; // Reemplaza esto con la forma en que obtienes el userId en tu aplicación
-
-  // La URL base a la que quieres añadir el userId
-  const baseUrl = 'http://localhost:8080/api/cart/';
-
-  // El enlace en el que quieres añadir el userId
-  const dynamicLink = document.getElementById('dynamicLink');
-
-  // Modifica el href del enlace para incluir el userId
-  dynamicLink.href = `${baseUrl}/${userId}`;
+document.addEventListener('DOMContentLoaded', (event) => {
+    fetch('/user/data', {
+        method: 'GET',
+        credentials: 'include' // Incluye cookies con la solicitud
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('User Profile:', data.profile);
+        console.log('User Cart:', data.cart);
+        // Aquí puedes actualizar la UI con la información del perfil y el carrito
+    })
+    .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
 });
+
 
 //******** renderizar products del cart *********//
 
 document.addEventListener('DOMContentLoaded', function() {
   const boxprods = document.getElementById('cartItems');
   const cartTotalElement = document.getElementById('cartTotal');
-  const userId = '66610197992f66dd423a1a8e' ; // Reemplaza esto con la forma en que obtienes el userId en tu aplicación
+  const userId = req.user.id;
 
   async function fetchCart() {
       try {

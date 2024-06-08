@@ -91,11 +91,11 @@ router.get('/viewPr', (req, res) => {
 
 // Obtener los productos del carrito para un usuario 
 
-router.get('/ByUser/:userId', isAuthenticated, async (req, res) => {
+router.get('/ByUser', isAuthenticated, async (req, res) => {
     try {
-        const userId = req.params.userId;
+        const userId = req.cookies.userId;
 
-        const cart = await Cart.findOne({ userId }).populate('items.product');
+        const cart = await Cart.findOne({ userId: userId }).populate('items.product');
 
         if (!cart) {
             return res.status(404).json({ msg: 'Carrito no encontrado' });

@@ -18,6 +18,7 @@ const GitHubStrategy = require('passport-github2').Strategy;
 const multer = require('multer')
 const path = require('path');
 const nodemailer = require('nodemailer')
+const cookieParser = require('cookie-parser');
 
 const http = require('http');
 const server = http.createServer(app);
@@ -39,7 +40,7 @@ app.use(session({
   },
 }));
 
-
+app.use(cookieParser());
 
 initializePassport()
 
@@ -85,7 +86,9 @@ const chatRouter = require('./routes/chat.router');
 const sessionsrouter = require('./routes/sessions.router');
 const authRoutes = require('./routes/auth.router');
 const mailRouter = require('./routes/mail.router');
+const userRouter = require('./routes/user.router')
 const ticketRouter = require('./routes/ticket.router')
+const viewsRouter = require('./routes/views.router')
 
 // Rutas
 app.use('/api/prods', productsRouter);
@@ -94,7 +97,10 @@ app.use('/api/chat', chatRouter)
 app.use('/api/sessions', sessionsrouter)
 app.use('/api/auth', authRoutes);
 app.use('/api/mail', mailRouter);
-// app.use('/api/ticket', ticketRouter);
+app.use('/api/ticket', ticketRouter);
+app.use('/api/user', userRouter)
+app.use('/api/view', viewsRouter)
+
 
 //Socket import
 const {Server} = require('socket.io')
