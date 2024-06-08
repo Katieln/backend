@@ -9,40 +9,6 @@ const path = require('path');
 const User = require('../models/user.model');
 const {createHash, isValidPassword} = require('../utils/bcrypt')
 
-// vista de productos
-router.get('/viewPr', (req, res) => {
-    res.render('products');
-});
-
-
-router.post('/viewPr', async (req, res) => {
-    const { email, password } = req.body;
-  
-    try {
-     
-        const user = await User.findOne({ email });
-  
-  
-        if (!user) {
-            return res.status(404).json({ error: 'Usuario no encontrado' });
-        }
-  
-  
-        if (!isValidPassword(password, user.password)) {
-            return res.status(401).json({ error: 'Contraseña incorrecta' });
-        }
-  
-
-        req.session.userId = user._id;
-        req.session.user = { email: user.email, username: user.username };
-
-        res.status(200).json({ message: 'Inicio de sesión exitoso', user });
-  
-    } catch (error) {
-        console.error('Error al iniciar sesión:', error);
-        res.status(500).json({ error: 'Error interno del servidor' });
-    }
-  });
 
 
 // Agregar producto
