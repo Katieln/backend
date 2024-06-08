@@ -15,7 +15,7 @@
     const isAuthenticated = await checkAuthentication();
     if (!isAuthenticated) {
       const messageContainer = document.getElementById('messageContainer');
-      messageContainer.textContent = 'Debe estar autenticado para agregar productos al carrito';
+      messageContainer.textContent = 'No estas conectado! debes ingresar para agregar productos al cart';
       return;
     }
     addBuyButtonListeners();

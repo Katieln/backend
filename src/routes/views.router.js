@@ -13,11 +13,20 @@ router.get('/profile', (req, res) => {
     res.render('profile')
 });
 
+// Ruta para obtener el carrt del usuario
+router.get('/cart', (req, res) => {
+    res.render('cart')
+});
+
 // vista de productos
 router.get('/products', (req, res) => {
     res.render('products');
 });
 
+// vista de ticket
+router.get('/ticket', (req, res) => {
+    res.render('ticket');
+});
 
 // Otras rutas y configuraciones...
 

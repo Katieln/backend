@@ -59,7 +59,7 @@ router.get('/logout', (req, res, next) => {
 
       res.clearCookie('connect.sid', { path: '/' }); 
 
-      res.redirect('/api/prods/viewPr');
+      res.redirect('/api/view/cart');
     });
   });
 });
@@ -83,7 +83,7 @@ router.get('/github/callback',
         username: req.user.username,
         email: req.user.email
       };
-      res.redirect('/api/prods/viewPr');
+      res.redirect('/api/view/cart');
     } else {
       console.log('Error en la autenticación');
       res.redirect('/login');

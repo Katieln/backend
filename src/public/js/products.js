@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="card col-md-4" style="width: 15rem; margin: 10px;">
             <img src="${prod.image}" class="card-img-top" alt="${prod.title}" />
             <div class="card-body">
+            
               <h5 class="card-title text-center">${prod.title.toUpperCase()}</h5>
               <p class="card-text">${prod.description}</p>
               <p class="card-text">Price: $${prod.price}</p>

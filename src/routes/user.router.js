@@ -28,7 +28,7 @@ router.get('/profile',  async (req, res) => {
             },
             cart: {
                 items: cart.items,
-                total: cart.total,
+                // total: cart.total,
             }
         });
     } catch (err) {

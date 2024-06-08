@@ -50,6 +50,29 @@
     border-color: rgb(106, 146, 57);
 }
 
+.logingit{
+    background-color: rgb(127, 202, 47);
+    border-color: rgb(194, 254, 120);
+}
+
+.loginlink{
+    background-color: rgb(48, 179, 255);
+    border-color: aqua;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.logout{
+    background-color: rgb(8, 29, 73);
+}
+
+.LoginLogout{
+    display: flex;
+    justify-content: space-around;
+    flex-direction:row;
+    align-items: center;
+}
+
 .loginbox{
     margin: 3rem;
     padding: 3rem;
@@ -59,9 +82,6 @@
 
 }
 
-.logout{
-    background-color: rgb(22, 42, 84);
-}
 
 .UserConnect{
     display: flex;

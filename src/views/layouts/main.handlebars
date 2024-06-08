@@ -13,46 +13,62 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">Tienda</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="/api/view/products">Products</a>
-          </li>
-           <li class="nav-item">
-            <a class="nav-link" href="/api/user/profile">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/api/auth/github">GitHub</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/api/auth/register">Register</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/api/auth/login">Login</a>
-          </li>
-          <li class="nav-item">
-            <a id="cartUserLink" class="nav-link" href="/api/user/profile">Cart</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/api/chat">chat</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/api/mail/">Mail</a>
-          </li>
-        </ul>
-      </div>
-      <a href="/api/auth/logout" class="btn btn-primary logout">Logout</a>
-    </div>
-  </nav>
+  <div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">Tienda</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/api/view/products">Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/api/user/profile">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/api/auth/github">GitHub</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/api/auth/register">Register</a>
+            </li>
+            <li class="nav-item">
+              <a id="cartUserLink" class="nav-link" href="/api/view/cart">Cart</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/api/view/ticket">ticket</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/api/chat/">chat</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/api/mail/">Mail</a>
+            </li>
+          </ul>
+        </div>
+        <div class="LoginLogout">
+          <div>
+            <a href="/api/auth/github" class="btn btn-primary logingit">Login with GitHub</a>
+          </div>
+          <div>
+            <a href="/api/auth/login" class="btn btn-primary loginlink">Login</a>
+          </div>
+          <div>
+            <a href="/api/auth/logout" class="btn btn-primary logout">Logout</a>
+          </div>
+        </div>
 
-<script src="/js/cart.js"></script>
+      </div>
+  </div>
+  </nav>
+  </div>
+
+
+
+  <script src="/js/cart.js"></script>
 
   <div class="container mt-5">
     {{{body}}}
@@ -71,4 +87,5 @@
 
 </body>
 <script src="/js/user.js"></script>
+
 </html>
