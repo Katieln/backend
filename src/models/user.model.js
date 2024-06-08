@@ -15,9 +15,7 @@ const userSchema = new Schema({
   },
   username: {
     type: String,
-    required: function() {
-      return this.method === 'github';
-    },
+    required: true,
   },
   email: {
     type: String,

@@ -1,60 +1,34 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-    fetch('/user/data', {
+// public/js/cart.js
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('/api/user/profile', {
         method: 'GET',
         credentials: 'include' // Incluye cookies con la solicitud
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
-        }
-        return response.json();
-    })
+    .then(response => response.json())
     .then(data => {
-        console.log('User Profile:', data.profile);
-        console.log('User Cart:', data.cart);
-        // Aquí puedes actualizar la UI con la información del perfil y el carrito
+        // Renderizar los datos del perfil del usuario
+        const profileContainer = document.getElementById('profile');
+        profileContainer.innerHTML = `
+            <p>Username: ${data.profile.username}</p>
+            <p>Email: ${data.profile.email}</p>
+            <p>Metodo de registro: ${data.profile.method}</p>
+        `;
+
+        // Renderizar los productos del carrito
+        const prodscartContainer = document.getElementById('prodscart');
+        data.cart.items.forEach(item => {
+            const productCard = document.createElement('div');
+            productCard.classList.add('card');
+            productCard.innerHTML = `
+                <div class="card-body">
+                    <h5 class="card-title">${item.product.title}</h5>
+                    <p class="card-text">Quantity: ${item.quantity}</p>
+                    <p class="card-text">Price: ${item.price}</p>
+                    <p class="card-text">Total Price: ${item.price * item.quantity}</p>
+                </div>
+            `;
+            prodscartContainer.appendChild(productCard);
+        });
     })
-    .catch(error => {
-        console.error('There was a problem with the fetch operation:', error);
-    });
-});
-
-
-//******** renderizar products del cart *********//
-
-document.addEventListener('DOMContentLoaded', function() {
-  const boxprods = document.getElementById('cartItems');
-  const cartTotalElement = document.getElementById('cartTotal');
-  const userId = req.user.id;
-
-  async function fetchCart() {
-      try {
-          const response = await fetch(`/api/cart/ByUser/${userId}`);
-          const data = await response.json();
-          showCart(data);
-      } catch (error) {
-          console.error('Error fetching cart:', error);
-      }
-  }
-
-  function showCart(cartData) {
-      boxprods.innerHTML = '';
-      cartData.products.forEach(prod => {
-          boxprods.innerHTML += `
-              <div class="card col-md-4" style="width: 15rem; margin: 10px;">
-                  <img src="${prod.image} class="card-img-top" alt="${prod.product}" />
-                  <div class="card-body">
-                      <h5 class="card-title text-center">${prod.product.toUpperCase()}</h5>
-                      <p class="card-text">Cantidad: ${prod.quantity}</p>
-                      <p class="card-text">Precio unitario: $${prod.price}</p>
-                      <p class="card-text">Precio total: $${prod.totalPrice}</p>
-                  </div>
-              </div>
-          `;
-      });
-
-      cartTotalElement.textContent = cartData.total.toFixed(2);
-  }
-
-  fetchCart();
+    .catch(error => console.error('Error al obtener los datos del perfil:', error));
 });

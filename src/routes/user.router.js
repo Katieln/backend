@@ -24,12 +24,11 @@ router.get('/profile',  async (req, res) => {
                 id: user._id,
                 username: user.username,
                 email: user.email,
-                // otros campos del perfil...
+                method: user.method,
             },
             cart: {
                 items: cart.items,
                 total: cart.total,
-                // otros campos del carrito...
             }
         });
     } catch (err) {
