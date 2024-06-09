@@ -16,7 +16,7 @@ const passport = require('passport')
 //   });
 
 
-// Ruta para renderizar el carrito
+
 router.post('/add-to-cart', async (req, res) => {
     try {
         if (!req.isAuthenticated()) {
@@ -80,8 +80,51 @@ router.post('/add-to-cart', async (req, res) => {
     }
 });
 
+
+
   
-  
+  // Ruta para disminuir la cantidad de un producto en el carrito
+  router.post('/remove-from-cart', async (req, res) => {
+    try {
+        if (!req.isAuthenticated()) {
+            return res.status(401).json({ error: 'Usuario no autenticado' });
+        }
+
+        const { productId } = req.body;
+        const userId = req.user._id;
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({ error: 'Usuario no encontrado' });
+        }
+
+        let cart = await Cart.findOne({ userId: userId });
+        if (!cart) {
+            return res.status(404).json({ error: 'Carrito no encontrado' });
+        }
+
+        const item = cart.items.find(item => item.product.equals(productId));
+        if (!item) {
+            return res.status(404).json({ error: 'Producto no encontrado en el carrito' });
+        }
+
+        item.quantity -= 1;
+        item.totalPrice -= item.price;
+        if (item.quantity <= 0) {
+            cart.items = cart.items.filter(item => !item.product.equals(productId));
+        }
+
+        cart.total = cart.items.reduce((total, item) => total + item.totalPrice, 0);
+
+        await cart.save();
+        res.json({ message: 'Producto eliminado correctamente del carrito' });
+    } catch (error) {
+        console.error('Error al eliminar el producto del carrito:', error);
+        res.status(500).json({ error: 'Error al eliminar el producto del carrito' });
+    }
+});
+
+
 router.get('/viewPr', (req, res) => {
     res.render('cart')
 });

@@ -6,7 +6,7 @@
 .product-card {
     width: 10%;
     margin-right: 15px;
-    background-color: rgb(233, 241, 254);
+    background-color: rgb(240, 245, 252);
     padding: 10px;
     border-radius: 7px;
 }
@@ -65,8 +65,8 @@ border-radius: 10px;
     width: 180px;
     height: 140px;
     object-fit: cover;
-    background-color: rgb(245, 249, 254);
-    padding: 5px;
+    background-color: rgb(233, 245, 251);
+    padding: 6px;
     border-radius: 7px;
 }
 
@@ -86,11 +86,11 @@ flex-direction: column;
         justify-content: space-around;
 }
 
-.delete{
+.btn-decrease{
     background-color: rgb(156, 210, 70);
 }
 
-.add{
+.btn-increase{
     background-color: rgb(87, 221, 255);
 }
 
