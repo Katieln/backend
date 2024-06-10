@@ -28,7 +28,7 @@ router.get('/register', (req, res) => {
 
 // Inicio de sesión local
 router.post('/login', passport.authenticate('login', {
-  successRedirect: '/api/prods/viewPr',
+  successRedirect: '/api/view/products',
   failureRedirect: '/api/auth/login',
   failureFlash: true
 }), (req, res) => {

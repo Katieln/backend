@@ -6,6 +6,10 @@ const ticketSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     },
+    email:{
+        type: String,
+        required: true
+    },
     products: [
         {
             productId: {

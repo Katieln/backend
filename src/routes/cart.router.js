@@ -39,6 +39,11 @@ router.post('/add-to-cart', async (req, res) => {
             return res.status(404).json({ error: 'Producto no encontrado' });
         }
 
+        // Verificar si hay suficiente stock
+        if (product.stock < product.quantity) {
+            return res.status(400).json({ error: `Stock insuficiente para el producto: ${product.title}` });
+        }
+
         let cart = await Cart.findOne({ userId: userId });
         if (!cart) {
             cart = new Cart({

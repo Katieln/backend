@@ -17,17 +17,23 @@ router.post('/complete-purchase', async (req, res) => {
         const cart = await Cart.findOne({ userId: userId }).populate('items.product');
 
         if (!user) {
-            return res.status(404).json({ msg: 'Usuario no encontrado' });
+            return res.status(404).json({ error: 'Usuario no encontrado' });
         }
 
         if (!cart) {
-            return res.status(404).json({ msg: 'Carrito no encontrado' });
+            return res.status(404).json({ error: 'Carrito no encontrado' });
+        }
+
+        // Verificar si ya existe un ticket para este carrito
+        const existingTicket = await Ticket.findOne({ userId: userId, cartId: cart._id });
+        if (existingTicket) {
+            return res.status(400).json({ error: 'Ya existe un ticket para este carrito' });
         }
 
         // Crear el objeto de productos para el ticket
         const products = cart.items.map(item => ({
             productId: item.product._id,
-            title: item.title,
+            title: item.product.title,
             quantity: item.quantity,
             price: item.product.price,
             total: item.quantity * item.product.price
@@ -39,6 +45,8 @@ router.post('/complete-purchase', async (req, res) => {
         // Crear un nuevo documento de Ticket
         const newTicket = new Ticket({
             userId: user._id,
+            email: user.email,
+            cartId: cart._id,
             products: products,
             totalPrice: totalPrice
         });
@@ -61,12 +69,13 @@ router.post('/complete-purchase', async (req, res) => {
         cart.total = 0;
         await cart.save();
 
-        res.status(200).json({ success: true, ticket: newTicket, message: 'Compra completada y stock reducido correctamente' });
+        res.status(200).json({ success: true, message: 'Compra completada y stock reducido correctamente' });
     } catch (err) {
         console.error('Error al completar la compra:', err);
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
+
 
 
 
@@ -104,122 +113,6 @@ router.get('/show', async (req, res) => {
     }
 });
 
-
-
-// **********  Ruta finCompra vaciar cart y reducir stock ********** //
-
-// Confirmar compra y reducir stock
-router.post('/confirm-purchase', async (req, res) => {
-    try {
-        const { cartId } = req.body;
-
-        const cart = await Cart.findById(cartId).populate('items.product');
-        if (!cart) {
-            return res.status(404).json({ error: 'Carrito no encontrado' });
-        }
-
-        // Reducir el stock de cada producto en el carrito
-        for (const item of cart.items) {
-            const product = await Product.findById(item.product._id);
-            if (product.stock < item.quantity) {
-                return res.status(400).json({ error: 'Stock insuficiente para el producto: ' + product.title });
-            }
-            product.stock -= item.quantity;
-            await product.save();
-        }
-
-        // Vaciar el carrito después de confirmar la compra
-        cart.items = [];
-        cart.total = 0;
-        await cart.save();
-
-        res.json({ message: 'Compra confirmada y stock reducido correctamente' });
-    } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ error: 'Error al confirmar la compra' });
-    }
-});
-
-// **********  Ruta generar Tickets ********** //
-
-
-router.post('/generate-ticket', async (req, res) => {
-    try {
-        const userId = req.user._id;
-        const user = await User.findById(userId);
-        const cart = await Cart.findOne({ userId: userId }).populate('items.product');
-
-        if (!user) {
-            return res.status(404).json({ msg: 'Usuario no encontrado' });
-        }
-
-        if (!cart) {
-            return res.status(404).json({ msg: 'Carrito no encontrado' });
-        }
-
-        // Crear el objeto de productos para el ticket
-        const products = cart.items.map(item => ({
-            productId: item.product._id,
-            title: item.title,
-            quantity: item.quantity,
-            price: item.product.price,
-            total: item.quantity * item.product.price
-        }));
-
-        // Calcular el precio total del ticket
-        const totalPrice = cart.items.reduce((sum, item) => sum + (item.quantity * item.product.price), 0);
-
-        // Crear un nuevo documento de Ticket
-        const newTicket = new Ticket({
-            userId: user._id,
-            products: products,
-            totalPrice: totalPrice
-        });
-
-        // Guardar el ticket en la base de datos
-        await newTicket.save();
-
-        res.status(200).json({ success: true, ticket: newTicket });
-    } catch (err) {
-        console.error('Error al generar el ticket:', err);
-        res.status(500).json({ error: 'Error interno del servidor' });
-    }
-});
-
-
-// **********  Ruta finCompra vaciar cart y reducir stock ********** //
-
-// Confirmar compra y reducir stock
-router.post('/confirm-purchase1', async (req, res) => {
-    try {
-        const { cartId } = req.body;
-
-        const cart = await Cart.findById(cartId).populate('items.product');
-        if (!cart) {
-            return res.status(404).json({ error: 'Carrito no encontrado' });
-        }
-
-        // Reducir el stock de cada producto en el carrito
-        for (const item of cart.items) {
-            const product = await Product.findById(item.product._id);
-            if (product.stock < item.quantity) {
-                return res.status(400).json({ error: 'Stock insuficiente para el producto: ' + product.title });
-            }
-            product.stock -= item.quantity;
-            await product.save();
-        }
-
-        // Vaciar el carrito después de confirmar la compra
-        cart.items = [];
-        cart.total = 0;
-        await cart.save();
-
-        res.json({ message: 'Compra confirmada y stock reducido correctamente' });
-    } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ error: 'Error al confirmar la compra' });
-    }
-});
 
 
 
