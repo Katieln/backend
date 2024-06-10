@@ -16,7 +16,7 @@ const userSchema = new Schema({
   address: {
     type: String,
     required: true,
-    default: 'futureAddress', // Añadir un valor por defecto
+ // Añadir un valor por defecto
   },
   username: {
     type: String,

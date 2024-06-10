@@ -10,25 +10,25 @@ router.put('/', async (req, res) => {
 
     try {
         const updatePromises = updates.map(async update => {
-            const { productId, newStock } = update;
-            const product = await Product.findByIdAndUpdate(
-                productId,
-                { stock: newStock },
+            const { userId, newStock } = update;
+            const user = await user.findByIdAndUpdate(
+                userId,
+                { address: newAdress },
                 { new: true } // Devuelve el documento actualizado
             );
 
-            if (!product) {
-                return Promise.reject(new Error(`Producto no encontrado: ${productId}`));
+            if (!user) {
+                return Promise.reject(new Error(`usero no encontrado: ${userId}`));
             }
 
-            return product;
+            return user;
         });
 
-        const updatedProducts = await Promise.all(updatePromises);
+        const updatedusers = await Promise.all(updatePromises);
 
         res.status(200).json({
-            msg: 'Stock de los productos actualizado correctamente',
-            data: updatedProducts
+            msg: 'Stock de los useros actualizado correctamente',
+            data: updateduser
         });
     } catch (err) {
         console.error('Error al actualizar el stock de los productos:', err);

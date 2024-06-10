@@ -20,17 +20,18 @@
 
         <div id="totalPrice" class="totalPrice"></div>
 
-        <form >
-                <p> ~ Escribe aqui tu dirección donde quieres recibir tu producto ~ </p>
-                <input type="text" name="adress" id="adress" class="form-control mr-2" placeholder="Direccion" required>
-      
-        <button id="add-address" type="submit" class="btn btn-primary fincompra ">FAgregar Direccion</button>
-         </form>
+       <div id="addressFormContainer" class="addressFormContainer"></div>
+
+       <div id="addressInfo" class="addressInfo"></div>
+       
 {{!-- 
          <a href="/api/view/ticket" class="btn btn-primary fincompra">Confirmar Compra</a> --}}
 
-         <button id="confirmPurchase" type="submit" class="btn btn-primary">Confirmar Compra1</button>
+         <button id="confirmPurchase" type="submit" class="btn btn-primary">Confirmar Compra</button>
 
+         <button id="generateTicket" class="btn btn-primary">Generar Ticket</button>
+
+          <div id="ticketContainer"></div>
          
         {{!-- <div id="confirmarCompra" class="confirmarCompra"></div> --}}
 

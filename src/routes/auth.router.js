@@ -14,8 +14,8 @@ const Cart = require('../models/cart.model')
 
 // Registro de usuarios local
 router.post('/register', passport.authenticate('register', {
-  // successRedirect: 'api/view/products',
-  // failureRedirect: '/api/auth/register',
+  successRedirect: '/api/view/products',
+  failureRedirect: '/api/auth/register',
   failureFlash: true
 }), (req, res) => {
   res.send('Usuario registrado');

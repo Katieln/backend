@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models/user.model')
 const Cart = require('../models/cart.model');
 const isAuthenticated = require('../middlewares/authMiddleware');
+const Ticket = require('../models/ticket.model')
 
 // Ruta para obtener el perfil y el carrito del usuario
 router.get('/profile', async (req, res) => {
@@ -41,32 +42,26 @@ router.get('/profile', async (req, res) => {
 
 
 
-// Ruta para actualizar la dirección del usuario
-// Ruta para actualizar la dirección del usuario
-router.put('/address', isAuthenticated, async (req, res) => {
-    try {
-        const userId = req.user._id; // Asumiendo que tienes middleware para autenticación
-        const { address } = req.body;
 
-        const user = await User.findByIdAndUpdate(
+
+router.post('/update-address', async (req, res) => {
+    try {
+        const { userId, newAddress } = req.body;
+
+        // Buscar el usuario por su ID y actualizar la dirección
+        const updatedUser = await User.findByIdAndUpdate(
             userId,
-            { address: address },
+            { address: newAddress },
             { new: true } // Devuelve el documento actualizado
         );
 
-        if (!user) {
+        if (!updatedUser) {
             return res.status(404).json({ error: 'Usuario no encontrado' });
         }
 
         res.status(200).json({
             msg: 'Dirección actualizada correctamente',
-            data: {
-                id: user._id,
-                username: user.username,
-                email: user.email,
-                method: user.method,
-                address: user.address,
-            }
+            data: updatedUser
         });
     } catch (err) {
         console.error('Error al actualizar la dirección del usuario:', err);
@@ -74,8 +69,9 @@ router.put('/address', isAuthenticated, async (req, res) => {
     }
 });
 
+
 // Ruta para obtener todos los usuarios
-router.get('/hola', async (req, res) => {
+router.get('/allU', async (req, res) => {
     try {
         const users = await User.find();
         res.json(users);
