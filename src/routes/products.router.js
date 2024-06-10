@@ -41,15 +41,9 @@ router.put('/upload', upload.single('image'), async (req, res) => {
       }
  
       const filePath = `/images/${req.file.filename}`;
-      const thumbnailPath = `/thumbnails/${req.file.filename}`; 
- 
 
-      await sharp(req.file.path)
-        .resize(150, 150)
-        .toFile(path.join(__dirname, '../public/thumbnails', req.file.filename));
  
       product.image = filePath; 
-      product.thumbnail = thumbnailPath; 
       await product.save();
  
       res.send('Image and thumbnail uploaded and product updated successfully.');
@@ -72,6 +66,8 @@ router.get('/allPr', async (req, res) => {
         res.status(500).send({ error: err });
     }
 });
+
+
 
 
 // Obtener producto por ID

@@ -14,8 +14,8 @@ const Cart = require('../models/cart.model')
 
 // Registro de usuarios local
 router.post('/register', passport.authenticate('register', {
-  successRedirect: '/api/prods/viewPr',
-  failureRedirect: '/api/auth/register',
+  // successRedirect: 'api/view/products',
+  // failureRedirect: '/api/auth/register',
   failureFlash: true
 }), (req, res) => {
   res.send('Usuario registrado');
@@ -81,7 +81,9 @@ router.get('/github/callback',
       req.session.user = {
         id: req.user._id,
         username: req.user.username,
-        email: req.user.email
+        email: req.user.email,
+        address: 'futureAddress',
+        
       };
       res.redirect('/api/view/cart');
     } else {

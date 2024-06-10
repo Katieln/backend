@@ -21,11 +21,12 @@ const initializePassport = () => {
         }
         let userNew = {
           method: 'local',
-          name: userData.name,
+          username: userData.username,
           email: userData.email,
           lastname: userData.lastname,
           password: createHash(userData.password),
-          tel: userData.tel
+          address: userData.address,
+          phone: userData.phone
         };
         let result = await User.create(userNew);
         return done(null, result);
@@ -76,6 +77,7 @@ const initializePassport = () => {
           githubId: profile.id,
           username: profile.username,
           email: email,
+          address: 'futureAddress', 
           displayName: profile.displayName,
           profileUrl: profile.profileUrl,
           avatarUrl: profile._json.avatar_url
@@ -99,6 +101,7 @@ passport.serializeUser((user, done) => {
     id: user._id,
     method: user.method,
     email: user.email,
+    address: user.address,
     connectionTime: new Date()
   });
 });

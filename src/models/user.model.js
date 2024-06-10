@@ -13,6 +13,11 @@ const userSchema = new Schema({
       return this.method === 'github';
     },
   },
+  address: {
+    type: String,
+    required: true,
+    default: 'futureAddress', // Añadir un valor por defecto
+  },
   username: {
     type: String,
     required: true,

@@ -2,12 +2,6 @@
 
 // *** Obtener datos y cart del usuario autenticado *** //
 
-// public/js/cart.js
-
-// *** Obtener datos y cart del usuario autenticado *** //
-
-// public/js/cart.js
-
 document.addEventListener('DOMContentLoaded', () => {
     fetch('/api/user/profile', {
         method: 'GET',
@@ -15,13 +9,18 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .then(response => response.json())
     .then(data => {
+
+        cartId = data.cart.id;
         // Renderizar los datos del perfil del usuario
         const profileContainer = document.getElementById('profile');
         profileContainer.innerHTML = `
         <div class="userConnected"> 
            <h6>* Username: ${data.profile.username} // ${data.profile.method} </h6>
            <h6> * Email: ${data.profile.email} </h6>
+           <h6> * Email: ${data.profile.address} </h6>
         </div>`;
+    
+
 
         // Renderizar los productos del carrito
         const prodscartContainer = document.getElementById('prodscart');
@@ -49,8 +48,17 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             prodscartContainer.appendChild(productCard);
         });
+        const totalPrice = document.getElementById('totalPrice');
+        totalPrice.innerHTML = ` <h5> Precio total de tu compra: $${data.cart.total} </h5>`;
 
-        // Añadir eventos a los botones
+        // const confirmPurchaseContainer = document.getElementById('confirmPurchaseContainer');
+        // confirmPurchaseContainer.innerHTML = `
+        //     <button id="confirmPurchase" type="submit" class="btn btn-primary">
+        //         Confirmar Compra
+        //     </button>`;
+
+       // *** Funcionalidad Botones increse y decrease *** //
+
         addQuantityButtonListeners();
     })
     .catch(error => console.error('Error al obtener los datos del perfil:', error));
@@ -75,7 +83,7 @@ function addQuantityButtonListeners() {
                     const errorData = await response.json();
                     messageContainer.textContent = `Error: ${errorData.error}`;
                 }
-                window.location.reload(); // Recargar la página para ver los cambios
+                window.location.reload();
             } catch (error) {
                 console.error('Error:', error);
                 messageContainer.textContent = 'Error al agregar el producto al carrito';
@@ -101,7 +109,7 @@ function addQuantityButtonListeners() {
                     const errorData = await response.json();
                     messageContainer.textContent = `Error: ${errorData.error}`;
                 }
-                window.location.reload(); // Recargar la página para ver los cambios
+                window.location.reload(); 
             } catch (error) {
                 console.error('Error:', error);
                 messageContainer.textContent = 'Error al eliminar el producto del carrito';
@@ -109,3 +117,61 @@ function addQuantityButtonListeners() {
         });
     });
 }
+
+// *** Agregar dirección a usuario *** //
+
+document.getElementById('addressForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Evita el envío del formulario por defecto
+
+    const address = document.getElementById('address').value;
+
+    fetch('/api/user/address', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ address: address })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.msg) {
+            console.log(data.msg);
+            // Aquí puedes mostrar un mensaje al usuario o realizar alguna otra acción
+            window.location.reload(); // Recargar la página para mostrar la dirección actualizada en el perfil
+        } else {
+            console.error(data.error);
+            // Aquí puedes manejar el error y mostrar un mensaje al usuario
+        }
+    })
+    .catch(error => console.error('Error al actualizar la dirección:', error));
+});
+
+// *** Confirmar Compra *** //
+
+        // *** Listener para Confirmar Compra *** //
+        document.getElementById('confirmPurchase').addEventListener('click', async function(event) {
+            event.preventDefault(); // Evita la acción predeterminada del enlace
+
+            try {
+                const response = await fetch('/api/ticket/confirm-purchase', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        cartId: cartId // Utilizar el ID del carrito almacenado
+                    })
+                });
+
+                if (response.ok) {
+                    window.location.href = '/api/view/ticket'; // Redirigir a la página de confirmación
+                } else {
+                    const errorData = await response.json();
+                    console.error('Error:', errorData.error);
+                    // Manejar el error, por ejemplo, mostrar un mensaje al usuario
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                // Manejar el error, por ejemplo, mostrar un mensaje al usuario
+            }
+        });

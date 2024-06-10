@@ -20,10 +20,10 @@ document.addEventListener('DOMContentLoaded', function() {
             <img src="${prod.image}" class="card-img-top" alt="${prod.title}" />
             <h5 class="card-title text-center">${prod.title.toUpperCase()}</h5>
             <div class="product-card-body">
-            
-                          <p class="product-card-text">${prod.description}</p>
+             <p class="product-card-text">${prod.description}</p>
               <p class="product-card-text">Price: $${prod.price}</p>
               <p class="product-card-text">Category: ${prod.category}</p>
+              <p class="product-card-text">Stock: ${prod.stock}</p>
               <button data-product-id="${prod._id}" class="btn btn-primary comprar">Comprar</button>
             </div>
           </div>
