@@ -89,7 +89,7 @@ const mailRouter = require('./routes/mail.router');
 const userRouter = require('./routes/user.router')
 const ticketRouter = require('./routes/ticket.router')
 const viewsRouter = require('./routes/views.router')
-const stockRouter = require('./routes/stock.router')
+
 
 // Rutas
 app.use('/api/prods', productsRouter);
@@ -101,7 +101,7 @@ app.use('/api/mail', mailRouter);
 app.use('/api/ticket', ticketRouter);
 app.use('/api/user', userRouter)
 app.use('/api/view', viewsRouter)
-app.use('/api/stock', stockRouter)
+
 
 
 //Socket import

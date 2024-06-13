@@ -8,12 +8,17 @@ const { isAuthenticated } = require('../middlewares/authMiddleware');
 const User = require('../models/user.model');
 const Cart = require('../models/cart.model');
 
-// Ruta para obtener el perfil del usuario autenticado
+// Vista profile
 router.get('/profile', (req, res) => {
     res.render('profile')
 });
 
-// Ruta para obtener el carrt del usuario
+// Vista de registro
+router.get('/register', (req, res) => {
+    res.render('register');
+  });
+
+// Vista de cart
 router.get('/cart', (req, res) => {
     res.render('cart')
 });
@@ -28,7 +33,12 @@ router.get('/ticket', (req, res) => {
     res.render('ticket');
 });
 
-// Otras rutas y configuraciones...
+//  vista de mail
+router.get('/mail', (req, res) => {
+    res.render('mail');
+  });
+
+
 
 
 module.exports = router;

@@ -6,10 +6,6 @@ const nodemailer = require('nodemailer')
 const path = require('path')
 
 
-//  vista de cart
-router.get('/', (req, res) => {
-    res.render('mail');
-  });
 
 
 

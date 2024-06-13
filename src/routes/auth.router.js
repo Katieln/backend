@@ -21,10 +21,7 @@ router.post('/register', passport.authenticate('register', {
   res.send('Usuario registrado');
 });
 
-// Ruta para renderizar la vista de registro
-router.get('/register', (req, res) => {
-  res.render('register');
-});
+
 
 // Inicio de sesión local
 router.post('/login', passport.authenticate('login', {

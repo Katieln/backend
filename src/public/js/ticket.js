@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', () => {
     fetch('/api/ticket/show', {
         method: 'GET',

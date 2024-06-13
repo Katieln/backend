@@ -21,7 +21,7 @@
     addBuyButtonListeners();
   });
 
-  // ******* mostrar usuario ****** //
+  // ******* mostrar usuario no conectado logout ****** //
 
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -46,6 +46,7 @@
     });
   });
   
+  // ******* mostrar usuario conectado github ****** //
 
   document.addEventListener('DOMContentLoaded', () => {
     const githubButton = document.getElementById('githubButton');
