@@ -2,10 +2,22 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     const boxprods = document.getElementById('misprods');
+    const categorySelect = document.getElementById('categorySelect');
+    const messageContainer = document.getElementById('messageContainer');
+
+    categorySelect.addEventListener('change', fetchProducts);
   
     async function fetchProducts() {
+
+      const selectedCategory = categorySelect.value;
+      let url = '/api/prods/allPr';
+      
+      if (selectedCategory) {
+          url += `?category=${selectedCategory}`;
+      }
+
       try {
-        const response = await fetch('/api/prods/allPr');
+        const response = await fetch(url);
         const data = await response.json();
         showprods(data);
       } catch (error) {
@@ -14,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   
     function showprods(listProds) {
+      boxprods.innerHTML = '',
       listProds.forEach(prod => {
         boxprods.innerHTML += `
           <div class="product-card col-md-4" style="width: 15rem; margin: 10px;">

@@ -58,12 +58,29 @@ router.put('/upload', upload.single('image'), async (req, res) => {
 
 
 // Obtener todos los productos
+// router.get('/allPr', async (req, res) => {
+//     try {
+//         const allProducts = await Product.find();
+//         res.json(allProducts); 
+//     } catch (err) {
+//         res.status(500).send({ error: err });
+//     }
+// });
+
+// Obtener todos los productos con filtros
 router.get('/allPr', async (req, res) => {
     try {
-        const allProducts = await Product.find();
-        res.json(allProducts); 
+        const { category } = req.query;
+        const filters = {};
+
+        if (category) {
+            filters.category = category;
+        }
+
+        const allProducts = await Product.find(filters);
+        res.json(allProducts);
     } catch (err) {
-        res.status(500).send({ error: err });
+        res.status(500).send({ error: err.message });
     }
 });
 
