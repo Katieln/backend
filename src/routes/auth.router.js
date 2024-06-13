@@ -59,10 +59,11 @@ router.get('/logout', (req, res, next) => {
 
       res.clearCookie('connect.sid', { path: '/' }); 
 
-      res.redirect('/api/view/cart');
+      res.sendStatus(200);
     });
   });
 });
+
 
 
 // ************ Configurar rutas GITHUB ************** //
@@ -85,7 +86,7 @@ router.get('/github/callback',
         address: 'futureAddress',
         
       };
-      res.redirect('/api/view/cart');
+      res.redirect('/api/view/products');
     } else {
       console.log('Error en la autenticación');
       res.redirect('/login');

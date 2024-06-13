@@ -7,18 +7,32 @@ document.addEventListener('DOMContentLoaded', () => {
         method: 'GET',
         credentials: 'include' // Incluye cookies con la solicitud
     })
-    .then(response => response.json())
+    .then(response => {
+        if (response.status === 401) {
+            // Usuario no autenticado
+            throw new Error('Usuario no autenticado');
+        }
+        return response.json();
+    })
     .then(data => {
-
-        cartId = data.cart.id;
         // Renderizar los datos del perfil del usuario
         const profileContainer = document.getElementById('profile');
         profileContainer.innerHTML = `
-        <div class="userConnected"> 
-           <h6>* Username: ${data.profile.username} // ${data.profile.method} </h6>
-           <h6> * Email: ${data.profile.email} </h6>
-       
-        </div>`;
+            <div class="userConnected"> 
+                <h6>* Username: ${data.profile.username} // ${data.profile.method} </h6>
+                <h6>* Email: ${data.profile.email} </h6>
+            </div>`;
+    })
+    .catch(error => {
+        // Mostrar mensaje de "No estás conectado" si hay un error
+        const profileContainer = document.getElementById('profile');
+        profileContainer.innerHTML = `
+            <div class="userNotConnected">
+                <h6>No estás conectado</h6>
+            </div>`;
+        console.error('Error fetching profile:', error);
+
+
     
 {/* <h6> * Address: ${data.profile.address }  </h6> */}
 
