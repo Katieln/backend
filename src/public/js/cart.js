@@ -7,32 +7,18 @@ document.addEventListener('DOMContentLoaded', () => {
         method: 'GET',
         credentials: 'include' // Incluye cookies con la solicitud
     })
-    .then(response => {
-        if (response.status === 401) {
-            // Usuario no autenticado
-            throw new Error('Usuario no autenticado');
-        }
-        return response.json();
-    })
+    .then(response => response.json())
     .then(data => {
+
+        cartId = data.cart.id;
         // Renderizar los datos del perfil del usuario
         const profileContainer = document.getElementById('profile');
         profileContainer.innerHTML = `
-            <div class="userConnected"> 
-                <h6>* Username: ${data.profile.username} // ${data.profile.method} </h6>
-                <h6>* Email: ${data.profile.email} </h6>
-            </div>`;
-    })
-    .catch(error => {
-        // Mostrar mensaje de "No estás conectado" si hay un error
-        const profileContainer = document.getElementById('profile');
-        profileContainer.innerHTML = `
-            <div class="userNotConnected">
-                <h6>No estás conectado</h6>
-            </div>`;
-        console.error('Error fetching profile:', error);
-
-
+        <div class="userConnected"> 
+           <h6>* Username: ${data.profile.username} // ${data.profile.method} </h6>
+           <h6> * Email: ${data.profile.email} </h6>
+       
+        </div>`;
     
 {/* <h6> * Address: ${data.profile.address }  </h6> */}
 
@@ -134,41 +120,33 @@ function addQuantityButtonListeners() {
 
         // ********* Boton Confirmar Compra Total ********** //
 
+
         document.addEventListener('DOMContentLoaded', () => {
             const confirmPurchaseButton = document.getElementById('confirmPurchase');
         
-            confirmPurchaseButton.addEventListener('click', async () => {
-                // Deshabilitar el botón para prevenir múltiples clics
-                confirmPurchaseButton.disabled = true;
-        
-                try {
-                    // Hacer la solicitud POST al servidor
-                    const response = await fetch('/api/ticket/complete-purchase', {
-                        method: 'POST',
-                        credentials: 'include', // Incluye cookies con la solicitud
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    });
-        
-                    // Verificar si la respuesta es correcta
-                    if (response.ok) {
-                        // Redirigir a la página de mostrar ticket si la compra fue exitosa
-                        window.location.href = '/api/ticket/show';
-                    } else {
-                        // Obtener el mensaje de error desde la respuesta del servidor
-                        const errorData = await response.json();
-                       
-                        // Habilitar el botón nuevamente para que el usuario pueda intentar otra vez
-                        confirmPurchaseButton.disabled = false;
+            confirmPurchaseButton.addEventListener('click', () => {
+                fetch('/api/ticket/complete-purchase', {
+                    method: 'POST',
+                    credentials: 'include', // Incluye cookies con la solicitud
+                    headers: {
+                        'Content-Type': 'application/json'
                     }
-                } catch (error) {
-                    // Manejar errores en la solicitud
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Mostrar el ticket generado
+                        window.location.href = '/api/ticket/show';
+
+                    } else {
+                        alert('Error: ' + (data.error || 'No se pudo completar la compra.'));
+                    }
+                })
+                .catch(error => {
                     console.error('Error al confirmar la compra:', error);
-                    
-                    // Habilitar el botón nuevamente si hay un error
-                    confirmPurchaseButton.disabled = false;
-                }
+                    alert('Error al confirmar la compra');
+                });
             });
         });
         
+          
