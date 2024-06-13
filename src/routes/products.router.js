@@ -70,19 +70,35 @@ router.put('/upload', upload.single('image'), async (req, res) => {
 // Obtener todos los productos con filtros
 router.get('/allPr', async (req, res) => {
     try {
-        const { category } = req.query;
+        const { category, minPrice, maxPrice, sortBy } = req.query;
         const filters = {};
 
         if (category) {
             filters.category = category;
         }
 
-        const allProducts = await Product.find(filters);
+        if (minPrice) {
+            filters.price = { ...filters.price, $gte: minPrice };
+        }
+
+        if (maxPrice) {
+            filters.price = { ...filters.price, $lte: maxPrice };
+        }
+
+        let sortCriteria = {};
+        if (sortBy === 'priceAsc') {
+            sortCriteria = { price: 1 }; // Ordenar de menor a mayor
+        } else if (sortBy === 'priceDesc') {
+            sortCriteria = { price: -1 }; // Ordenar de mayor a menor
+        }
+
+        const allProducts = await Product.find(filters).sort(sortCriteria);
         res.json(allProducts);
     } catch (err) {
         res.status(500).send({ error: err.message });
     }
 });
+
 
 
 

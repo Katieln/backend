@@ -1,20 +1,44 @@
 ///********* Mostrar productos pantalla *********///
 
 document.addEventListener('DOMContentLoaded', function() {
-    const boxprods = document.getElementById('misprods');
-    const categorySelect = document.getElementById('categorySelect');
-    const messageContainer = document.getElementById('messageContainer');
+  const boxprods = document.getElementById('misprods');
+  const categorySelect = document.getElementById('categorySelect');
+  const minPriceInput = document.getElementById('minPriceInput');
+  const maxPriceInput = document.getElementById('maxPriceInput');
+  const sortSelect = document.getElementById('sortSelect');
+  const filterButton = document.getElementById('filterButton');
+  const messageContainer = document.getElementById('messageContainer');
 
-    categorySelect.addEventListener('change', fetchProducts);
+  filterButton.addEventListener('click', fetchProducts);
   
-    async function fetchProducts() {
 
+    async function fetchProducts() {
       const selectedCategory = categorySelect.value;
+      const minPrice = minPriceInput.value;
+      const maxPrice = maxPriceInput.value;
+      const sortBy = sortSelect.value;
+
       let url = '/api/prods/allPr';
-      
+
+      const params = new URLSearchParams();
+
       if (selectedCategory) {
-          url += `?category=${selectedCategory}`;
+          params.append('category', selectedCategory);
       }
+      
+      if (minPrice) {
+          params.append('minPrice', minPrice);
+      }
+
+      if (maxPrice) {
+          params.append('maxPrice', maxPrice);
+      }
+
+      if (sortBy) {
+        params.append('sortBy', sortBy);
+    }
+
+      url += `?${params.toString()}`;
 
       try {
         const response = await fetch(url);

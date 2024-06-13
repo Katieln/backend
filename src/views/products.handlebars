@@ -32,7 +32,22 @@
       <option value="ropa">Ropa</option>
     </select>
   </div>
-
+    <div>
+        <label for="minPriceInput">Min Price:</label>
+        <input type="number" id="minPriceInput" placeholder="Min Price">
+    </div>
+    <div>
+        <label for="maxPriceInput">Max Price:</label>
+        <input type="number" id="maxPriceInput" placeholder="Max Price">
+    </div>
+    <div>
+        <label for="sortSelect">Sort By:</label>
+        <select id="sortSelect">
+        <option value="priceAsc">Price: Low to High</option>
+        <option value="priceDesc">Price: High to Low</option>
+        </select>
+    </div>
+    <button id="filterButton" class="btn btn-outline-info">Aplicar filtro</button>
 
 
   <div id="misprods" class="row"></div>
