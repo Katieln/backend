@@ -63,8 +63,8 @@ user.model.js -> modelo de user; caracteristicas de datos para el user
 
 
 //******************************** *** Public *** ********************************//
+-% **Public** Frontend
 
--% Frontend **Public**
   ~ **css**
   Estilos diseño Frontend 
 
@@ -101,41 +101,59 @@ user.model.js -> modelo de user; caracteristicas de datos para el user
 - **Routes**
  ~ image -> carpeta iamgen envio de email
 auth.router.js ->
+* ruta post: register, login
+* ruta get: login, logout, github, checkauth
+
 cart.router.js -> 
+* ruta post: add-to-cart, remove-from-cart
+
+
 chat.router.js -> 
+
+
 mail.router.js -> 
+
+
 products.router.js ->
+
+
 sessions.router.js -> 
+
+
 ticket.router.js ->
+
+
 user.router.js ->
+
+
 views.router.js ->
 // Vista profile
-router.get('/profile', (req, res) => {
+* router.get('/profile', (req, res) => {
     res.render('profile')
 });
 
 // Vista de registro
-router.get('/register', (req, res) => {
+* router.get('/register', (req, res) => {
     res.render('register');
   });
 
 // Vista de cart
-router.get('/cart', (req, res) => {
+* router.get('/cart', (req, res) => {
     res.render('cart')
 });
 
 // vista de productos
-router.get('/products', (req, res) => {
+* router.get('/products', (req, res) => {
     res.render('products');
 });
 
 // vista de ticket
-router.get('/ticket', (req, res) => {
+* router.get('/ticket', (req, res) => {
     res.render('ticket');
 });
 
 //  vista de mail
-router.get('/mail', (req, res) => {
+* router.get('/mail', (req, res) => {
     res.render('mail');
   });
 

@@ -7,7 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
         method: 'GET',
         credentials: 'include' // Incluye cookies con la solicitud
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            const profileContainer = document.getElementById('profile');
+        profileContainer.innerHTML =
+        `<div class="userConnected"> 
+           <h6> Usuario No conectado </h6>
+        </div>`;
+        }
+        return response.json();
+    })
     .then(data => {
 
         cartId = data.cart.id;
@@ -17,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="userConnected"> 
            <h6>* Username: ${data.profile.username} // ${data.profile.method} </h6>
            <h6> * Email: ${data.profile.email} </h6>
-       
         </div>`;
     
 {/* <h6> * Address: ${data.profile.address }  </h6> */}
