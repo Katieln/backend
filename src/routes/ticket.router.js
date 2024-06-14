@@ -125,14 +125,14 @@ router.post('/save-address', (req, res) => {
         return res.status(400).json({ success: false, message: 'Dirección es requerida' });
     }
 
-    // Aquí puedes guardar la dirección en la sesión, base de datos, etc.
+   
     req.session.address = address;
 
     res.json({ success: true, message: 'Dirección guardada correctamente' });
 });
 
 router.get('/confirm-address', (req, res) => {
-    // Renderizar la vista de confirmación
+   
     res.sendFile(path.join(__dirname, 'path/to/confirm-address.html'));
 });
 

@@ -44,18 +44,18 @@ Esta es una aplicación web simple para mostrar una lista de productos. Los usua
 
 ## Estructura
 
-- **Config**
+# **Config**
 db.config.js -> conexion a la base de datos mongodb
 multer.config.js -> config de multer para imagenes 
 passport.config.js -> config passport-local passport github autenticación
 
-- **Controllers**
+# **Controllers**
 auth.controller.js -> controlador de autenticación
 
-- **Middlewares**
+# **Middlewares**
 authMiddleware.js -> middleware de autenticación
 
-- **Models**
+# **Models**
 cart.model.js -> modelo de cart; caracteristicas de datos para el cart
 pruduct.model.js -> modelo de pruduct; caracteristicas de datos para el pruduct
 ticket.model.js -> modelo de ticket; caracteristicas de datos para el ticket
@@ -63,7 +63,7 @@ user.model.js -> modelo de user; caracteristicas de datos para el user
 
 
 //******************************** *** Public *** ********************************//
--% **Public** Frontend
+# % **Public** Frontend
 
   ~ **css**
   Estilos diseño Frontend 
@@ -98,66 +98,58 @@ user.model.js -> modelo de user; caracteristicas de datos para el user
 
 //*******************************************************************************//
 
-- **Routes**
+# **Routes**
  ~ image -> carpeta iamgen envio de email
 auth.router.js ->
 * ruta post: register, login
 * ruta get: login, logout, github, checkauth
 
+
 cart.router.js -> 
-* ruta post: add-to-cart, remove-from-cart
+* ruta post: add-to-cart, remove-from-cart, <-- estas son las rutas que se usan desde fetch en frontend
+* ruta post: /pr(agregar producto al cart backend)
+* ruta get: ByUser(obtener cart por usuario backend), :cid (obtener cart por cartID backend),
+* ruta put: :userId/product/:productId(Actualizar cantidad de un producto por usuerID en el cart backend), :cid(actualizar cart por cartID)
+* ruta delete: :userID(eliminar todos los productos del cart del usuario backend), :userId/product/:productId(eliminar un producto del cart de un usuairo backend)
 
 
-chat.router.js -> 
+chat.router.js ->
+* ruta get: chat 
 
 
 mail.router.js -> 
+* ruta get: /send email 
+en dotenv {user: process.env.EMAIL_USER,  pass: process.env.EMAIL_PASS}
+emailUser = req.query.emailUser -> public/mail.js y mail.handlebars
 
 
 products.router.js ->
-
+* ruta post: newPr (agregar producto a la tienda)
+* ruta put: upload (agregar imagen al prodcuto)
+* ruta get: allPr (obtener todos los products), prById/:id(obtner producto por su Id)
+* ruta delete: prById/:id (eliminar producto por su Id)
+* ruta put: prById/:id (actualizar info del producto por su Id)
 
 sessions.router.js -> 
-
+* ruta get: github
 
 ticket.router.js ->
-
+* ruta post: complete-purchase (crear ticket)
+* ruta get: show (obtener info del ticket)
 
 user.router.js ->
-
+* ruta get: profile (obtener info del usuario, profile y cart), allU(obetenr info todos los usuarios)
 
 views.router.js ->
-// Vista profile
-* router.get('/profile', (req, res) => {
-    res.render('profile')
-});
+* ruta get: profile, register, cart, products, ticket, mail, 
 
-// Vista de registro
-* router.get('/register', (req, res) => {
-    res.render('register');
-  });
+# ** Utils **
+bcrypt.js -> encriptar contraseña
 
-// Vista de cart
-* router.get('/cart', (req, res) => {
-    res.render('cart')
-});
-
-// vista de productos
-* router.get('/products', (req, res) => {
-    res.render('products');
-});
-
-// vista de ticket
-* router.get('/ticket', (req, res) => {
-    res.render('ticket');
-});
-
-//  vista de mail
-* router.get('/mail', (req, res) => {
-    res.render('mail');
-  });
-
-
+# ** Views **
+html de vistas
+main.handlebars navbar, login, logout, login with github, info usuario conectado no conectado
+cart, chat, login, mail, products, profile, register, ticket
 
 
 
