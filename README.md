@@ -77,7 +77,7 @@ user.model.js -> modelo de user; caracteristicas de datos para el user
         /// *** Renderizar los productos del carrito *** //
         /// *** Funcionalidad Boton increase *** //  fetch ('/api/cart/add-to-cart', method: 'POST)
         /// *** Funcionalidad Boton decrease *** //  fetch ('/api/cart/remove-from-cart', method: 'POST)
-        /// *** Boton Confirmar Compra Total **** //  fetch ('/api/ticket/complete-purchase', method: 'POST credentials: 'include') 
+        /// *** Boton Confirmar Compra Total **** //  fetch ('/api/ticket/complete-purchase', method: 'POST credentials: 'include') elimina cantidad stock de products
 
   chat.js -> codigo cliente-forntend  para el chat con websocket 
 
