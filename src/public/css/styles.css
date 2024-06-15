@@ -61,23 +61,6 @@ padding: 5px;
 border-radius: 10px;
 }
 
-.container-ticket{
-    background-color: rgb(248, 248, 248);
-    padding: 20px;
-    margin: 20px;
-    margin-bottom: 1px;
-    width: 550px;
-    border-radius: 20px;
-}
-
-.ticket{
-    width: 500px;
-    margin-top: 30px;
-    display:flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-}
 
 
 .cart-card img {
@@ -251,4 +234,39 @@ flex-direction: column;
 .conectedUserPr{
     display: flex;
     justify-content: space-between;
+}
+
+
+.ticketprods{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 30px;
+}
+
+.container-ticket{
+    
+    padding: 20px;
+    margin: 20px;
+    margin-bottom: 1px;
+    width: 550px;
+   
+}
+
+.infoprodsticket{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px
+}
+
+.ticket{
+    background-color: rgb(248, 248, 248);
+    padding: 10px;
+    padding-left: 20px;
+    margin-top: 30px;
+    border-radius: 20px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /* align-items: center; */
 }

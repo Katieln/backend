@@ -4,9 +4,12 @@ const passport = require('passport');
 const { Router } = express;
 const router = new Router();
 const { profile, logout } = require('../controllers/auth.controller');
-const { isAuthenticated } = require('../middlewares/authMiddleware');
+const initializeAuth = require('../middlewares/authMiddleware');
 const User = require('../models/user.model');
 const Cart = require('../models/cart.model');
+
+
+const { isAuthenticated, authorize } = initializeAuth();
 
 // Vista profile
 router.get('/profile', (req, res) => {

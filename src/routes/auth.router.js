@@ -4,9 +4,11 @@ const passport = require('passport');
 const {Router} = express
 const router = new Router()
 const { profile, logout } = require('../controllers/auth.controller');
-const { isAuthenticated } = require('../middlewares/authMiddleware');
 const User = require ('../models/user.model')
 const Cart = require('../models/cart.model')
+const initializeAuth = require('../middlewares/authMiddleware');
+
+const { isAuthenticated, authorize } = initializeAuth();
 
 
 
@@ -15,7 +17,7 @@ const Cart = require('../models/cart.model')
 // Registro de usuarios local
 router.post('/register', passport.authenticate('register', {
   successRedirect: '/api/view/products',
-  failureRedirect: '/api/auth/register',
+  failureRedirect: '/api/view/register',
   failureFlash: true
 }), (req, res) => {
   res.send('Usuario registrado');
@@ -26,7 +28,7 @@ router.post('/register', passport.authenticate('register', {
 // Inicio de sesión local
 router.post('/login', passport.authenticate('login', {
   successRedirect: '/api/view/products',
-  failureRedirect: '/api/auth/login',
+  failureRedirect: '/api/view/register',
   failureFlash: true
 }), (req, res) => {
   req.session.user = req.user;

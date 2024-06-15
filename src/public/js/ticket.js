@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     fetch('/api/ticket/show', {
         method: 'GET',
@@ -6,38 +5,55 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .then(response => response.json())
     .then(data => {
-        // Renderizar los datos del perfil del usuario
-        const profileContainer = document.getElementById('profile');
-        profileContainer.innerHTML = `
-        <div class="buyer"> 
-           <h6>Username: ${data.profile.username} </h6>
-           <h6>Email: ${data.profile.email} </h6>
-        </div>`;
+        // Verifica si se encontraron tickets para el usuario
+        if (data.ticket.length === 0) {
+            const ticketContainer = document.getElementById('ticketContainer');
+            ticketContainer.innerHTML = '<p>No se encontraron tickets para este usuario</p>';
+        } else {
+            // Renderiza los tickets en el DOM
+            const ticketContainer = document.getElementById('ticketContainer');
+            data.ticket.forEach(ticket => {
+                const ticketElement = document.createElement('div');
+                ticketElement.classList.add('ticket');
 
-        // Renderizar los tickets
-        const ticketsContainer = document.getElementById('tickets');
-        ticketsContainer.innerHTML = '';
-        if (data.tickets && data.tickets.length > 0) {
-            data.tickets.forEach(ticket => {
-                const ticketHtml = `
-                    <div class="ticket">
-                        <h6>Ticket ID: ${ticket.ticketID}</h6>
-                        <ul>
-                            ${ticket.products.map(product => `
-                                <li>
-                                    <p>Producto: ${product.title}</p>
-                                    <p>Cantidad: ${product.quantity}</p>
-                                    <p>Precio: ${product.price}</p>
-                                </li>
-                            `).join('')}
-                        </ul>
-                        <p>Total: ${ticket.totalPrice}</p>
+                const createdAt = new Date(ticket.createdAt).toLocaleString();
+
+                // Construye el contenido del ticket
+                const ticketInfo = `
+                <div class="ticket">
+                    <div class="ticketid">
+                        <p>Created At: ${createdAt}</p>
+                    <h3>Ticket ID: ${ticket._id}</h3>
+                    <div class="ticketprods">
+                    <ul >
+                        ${ticket.products.map(product => `
+                            <div class="infoprodsticket">
+                            <li >
+                                <div>
+                                Product: ${product.productId.title}<br>
+                                </div><div>
+                                Quantity: ${product.quantity}<br>
+                                </div><div>
+                                Price: $${product.price}<br>
+                                </div><div>
+                                Total: $${product.total}
+                                </div>
+                 
+                            </li>
+                            </div>
+                        `).join('')}
+                    </ul>
+                    <h5>Total Price: $${ticket.totalPrice}</h5>
+                     <p>Email: ${ticket.email}</p>
+                  
+                    </div>
+                    
                     </div>
                 `;
-                ticketsContainer.innerHTML += ticketHtml;
+
+                ticketElement.innerHTML = ticketInfo;
+                ticketContainer.appendChild(ticketElement);
             });
-        } else {
-            ticketsContainer.innerHTML = '<p>No se encontraron tickets.</p>';
         }
     })
     .catch(error => {

@@ -31,6 +31,10 @@ const userSchema = new Schema({
       return this.method === 'local';
     },
   },
+  role: {
+    type: String,
+    enum: ['user', 'admin', 'premium']
+  },
   lastname: {
     type: String,
   },

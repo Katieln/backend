@@ -2,11 +2,16 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user.model')
 const Cart = require('../models/cart.model');
-const isAuthenticated = require('../middlewares/authMiddleware');
 const Ticket = require('../models/ticket.model')
+// const authorize = require('../middlewares/authMiddleware');
+const initializeAuth = require('../middlewares/authMiddleware');
+
+const { isAuthenticated, authorize } = initializeAuth();
+
+
 
 // Ruta para obtener el perfil y el carrito del usuario
-router.get('/profile', async (req, res) => {
+router.get('/profile', isAuthenticated, authorize(['user', 'admin', 'premium']), async (req, res) => {
     try {
         const userId = req.user._id;
         const user = await User.findById(userId);
@@ -16,23 +21,32 @@ router.get('/profile', async (req, res) => {
             return res.status(404).json({ msg: 'Usuario no encontrado' });
         }
 
-        if (!cart) {
-            return res.status(404).json({ msg: 'Carrito no encontrado' });
-        }
+        const profileData = {
+            id: user._id,
+            username: user.username,
+            email: user.email,
+            method: user.method,
+            address: user.address,
+            role: user.role
+          };
 
-        res.json({
-            profile: {
-                id: user._id,
-                username: user.username,
-                email: user.email,
-                method: user.method,
-                address: user.address, // Aquí se incluye la dirección actualizada
-            },
-            cart: {
+          let cartData = {
+            id: null,
+            items: [],
+            total: 0,
+        };
+
+             if (cart) {
+            cartData = {
                 id: cart.id,
                 items: cart.items,
                 total: cart.total,
-            }
+            };
+        }
+
+        res.json({
+            profile: profileData,
+            cart: cartData
         });
     } catch (err) {
         console.error(err);
@@ -71,7 +85,7 @@ router.post('/update-address', async (req, res) => {
 
 
 // Ruta para obtener todos los usuarios
-router.get('/allU', async (req, res) => {
+router.get('/allU', isAuthenticated, authorize(['admin']), async (req, res) => {
     try {
         const users = await User.find();
         res.json(users);

@@ -12,13 +12,13 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const {createHash} = require('../src/utils/bcrypt')
 const passport = require('passport')
-// const initPassport = require('./config/github.config')
 const initializePassport = require('./config/passport.config')
 const GitHubStrategy = require('passport-github2').Strategy;
 const multer = require('multer')
 const path = require('path');
 const nodemailer = require('nodemailer')
 const cookieParser = require('cookie-parser');
+const authMiddleware = require('./middlewares/authMiddleware');
 
 const http = require('http');
 const server = http.createServer(app);

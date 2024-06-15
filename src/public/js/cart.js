@@ -24,11 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const profileContainer = document.getElementById('profile');
         profileContainer.innerHTML = `
         <div class="userConnected"> 
-           <h6>* Username: ${data.profile.username} // ${data.profile.method} </h6>
+           <h6>* Username: ${data.profile.username} _ ${data.profile.role} _ ${data.profile.method}  </h6>
            <h6> * Email: ${data.profile.email} </h6>
+
         </div>`;
-    
-{/* <h6> * Address: ${data.profile.address }  </h6> */}
+        // <h6> * Address: ${data.profile.address }  </h6>    
+
 
         // Renderizar los productos del carrito
         const prodscartContainer = document.getElementById('prodscart');
@@ -125,36 +126,32 @@ function addQuantityButtonListeners() {
 }
 
 
+// ********* Boton Confirmar Compra Total ********** //
 
-        // ********* Boton Confirmar Compra Total ********** //
-
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const confirmPurchaseButton = document.getElementById('confirmPurchase');
-        
-            confirmPurchaseButton.addEventListener('click', () => {
-                fetch('/api/ticket/complete-purchase', {
-                    method: 'POST',
-                    credentials: 'include', // Incluye cookies con la solicitud
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // Mostrar el ticket generado
-                        window.location.href = '/api/ticket/show';
-
-                    } else {
-                        alert('Error: ' + (data.error || 'No se pudo completar la compra.'));
-                    }
-                })
-                .catch(error => {
-                    console.error('Error al confirmar la compra:', error);
-                    alert('Error al confirmar la compra');
-                });
-            });
+document.addEventListener('DOMContentLoaded', () => {
+    const confirmPurchaseButton = document.getElementById('confirmPurchase');
+    confirmPurchaseButton.addEventListener('click', () => {
+        confirmPurchaseButton.disabled = true;
+        fetch('/api/ticket/complete-purchase', {
+            method: 'POST',
+            credentials: 'include', // Incluye cookies con la solicitud
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Mostrar el ticket generado
+                window.location.href = '/api/view/ticket';
+            } else {
+                alert('Error: ' + (data.error || 'No se pudo completar la compra.'));
+            }
+        })
+        .catch(error => {
+            console.error('Error al confirmar la compra:', error);
+            alert('Error al confirmar la compra');
         });
-        
+    });
+});
           

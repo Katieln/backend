@@ -5,15 +5,10 @@ const User = require('../models/user.model');
 const Cart = require('../models/cart.model');
 const Product = require('../models/product.model');
 const { createHash, isValidPassword } = require('../utils/bcrypt');
-const isAuthenticated = require('../middlewares/authMiddleware');
 const passport = require('passport')
+const initializeAuth = require('../middlewares/authMiddleware');
 
-// products.router.js
-
-// vista de cart
-// router.get('/viewCart', (req, res) => {
-//     res.render('cart');
-//   });
+const { isAuthenticated, authorize } = initializeAuth();
 
 
 

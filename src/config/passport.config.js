@@ -26,7 +26,8 @@ const initializePassport = () => {
           lastname: userData.lastname,
           password: createHash(userData.password),
           address: userData.address,
-          phone: userData.phone
+          phone: userData.phone,
+          role: userData.role
         };
         let result = await User.create(userNew);
         return done(null, result);
@@ -80,7 +81,8 @@ const initializePassport = () => {
           address: 'futureAddress', 
           displayName: profile.displayName,
           profileUrl: profile.profileUrl,
-          avatarUrl: profile._json.avatar_url
+          avatarUrl: profile._json.avatar_url,
+          role: 'user'
         });
         let result = await User.create(newUser);
         done(null, result);
@@ -102,7 +104,8 @@ passport.serializeUser((user, done) => {
     method: user.method,
     email: user.email,
     address: user.address,
-    connectionTime: new Date()
+    connectionTime: new Date(),
+    roles: user.roles
   });
 });
 
