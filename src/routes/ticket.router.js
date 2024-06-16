@@ -7,6 +7,7 @@ const User = require('../models/user.model')
 const Product = require('../models/product.model')
 const initializeAuth = require('../middlewares/authMiddleware');
 const mongoose = require('mongoose');
+const nodemailer = require('nodemailer');
 
 
 
@@ -137,10 +138,6 @@ router.get('/show', async (req, res) => {
 });
 
 
-
-
-
-
 // **********  Ruta direccion ********** //
 
 router.post('/save-address', (req, res) => {
@@ -169,6 +166,13 @@ router.get('/api/get-address', (req, res) => {
 });
 
 
+//********************************************************//
+
+
+//********************************************************//
+
+
+//********************************************************//
 
 
 

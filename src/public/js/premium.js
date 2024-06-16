@@ -32,7 +32,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="product-card-body">
                         <p class="product-card-text">Stock: ${prod.stock}</p>
                         <p class="product-card-text">Original Price: <span class="original-price">$${prod.price}</span></p>
-                        <h6 class="product-card-text pricepremium">Price Premium (20% off): $${discountedPrice.toFixed(2)}</h6>
+                        <h6 class="product-card-text pricepremium">$${discountedPrice.toFixed(2)}
+                        Price Premium (20% off)</h6>
                 
                     </div>
                 </div>
