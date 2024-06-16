@@ -92,7 +92,7 @@ router.post('/complete-purchase', async (req, res) => {
         await session.abortTransaction();
         session.endSession();
         console.error('Error al completar la compra:', err);
-        res.status(500).json({ error: 'Error al completar la compra' });
+
     }
 });
 

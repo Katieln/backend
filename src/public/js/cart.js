@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => {
             console.error('Error al confirmar la compra:', error);
-            alert('Error al confirmar la compra');
+       
         });
     });
 });

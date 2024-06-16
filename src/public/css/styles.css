@@ -270,3 +270,23 @@ flex-direction: column;
     justify-content: space-around;
     /* align-items: center; */
 }
+
+.headerStyle{
+    background-color: rgba(178, 212, 253, 0.166);
+    padding: 5px;
+  }
+
+  .titlestore{
+    color: rgb(6, 139, 255);
+    text-shadow: 3px 3px 6px rgb(72, 180, 202);
+    font-family: "dancing script";
+    font-size: 30px;
+  }
+
+  /* .navbarStyle{
+    font-family: "indie flower";
+  } */
+  
+  .nav-item:hover{
+background-color: rgba(204, 242, 251, 0.475);
+  }

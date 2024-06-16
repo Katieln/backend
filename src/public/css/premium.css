@@ -1,0 +1,670 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-image: url(https://fondosmil.com/fondo/24522.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+  
+  h1 {
+    color: rgb(144, 0, 255);
+    text-shadow: 2px 2px rgba(200, 125, 254, 0.573);
+  }
+
+  .logingit{
+    background-color: rgb(127, 202, 47);
+    border-color: rgb(194, 254, 120);
+}
+  
+.logout{
+    background-color: rgb(8, 29, 73);
+}
+
+.loginlink{
+    background-color: rgb(48, 179, 255);
+    border-color: aqua;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+  .containerall{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .titlestore{
+    color: rgb(6, 139, 255);
+    text-shadow: 3px 3px 6px rgb(72, 180, 202);
+    font-family: "dancing script";
+    font-size: 30px;
+  }
+
+  header {
+    background-color: rgba(47, 40, 74, 0.188);
+    padding: 10px;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  header .logo {
+    background-color: rgba(216, 194, 252, 0.78);
+    padding: 20px;
+    border-radius: 20px;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+  header .logo h1 {
+    color: rgb(139, 6, 255);
+    text-shadow: 3px 3px 6px blueviolet;
+    font-family: "dancing script";
+    font-size: 40px;
+  }
+  header .logo:hover {
+    transition: all 2s;
+    transform: skewY(3deg);
+    background-color: rgba(194, 228, 252, 0.812);
+    padding: 20px;
+  }
+  header .logo-img {
+    border-radius: 40px;
+    height: 200px;
+  }
+  
+  nav {
+    background-color: rgba(67, 119, 223, 0.6470588235);
+  }
+  nav ul:hover {
+    transition: all 1s;
+    background-color: rgba(101, 143, 222, 0.488);
+    list-style: none;
+    padding: 1px;
+    border-radius: 10px;
+  }
+  nav ul li {
+    background-color: rgba(146, 188, 242, 0.487);
+    padding: 1px;
+    margin: 10px;
+    border-radius: 10px;
+  }
+  nav ul li:hover {
+    background-color: rgba(146, 224, 242, 0.487);
+    padding: 1px;
+    margin: 10px;
+    border-radius: 10px;
+  }
+  nav ul li a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    text-shadow: 3px 3px 3px rgb(104, 139, 192);
+    font-family: "indie flower";
+    font-size: 25px;
+  }
+  nav ul li a:hover {
+    color: rgb(58, 64, 255);
+    text-shadow: 2px 2px 4px rgb(92, 113, 171);
+    font-size: 30px;
+  }
+
+  .headerStyle{
+    background-color: rgba(0, 81, 255, 0.192);
+  }
+  
+  @media (min-width: 480px) {
+    header {
+      transition: all 4s;
+      background-color: rgba(188, 197, 255, 0.392);
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+    }
+  }
+  @media (min-width: 1024px) {
+    header {
+      background-color: rgba(68, 0, 255, 0.12);
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+    }
+    nav ul {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  section {
+    background-color: rgba(76, 152, 206, 0.203);
+    padding: 5px;
+    width: 100%;
+  }
+  
+  .container {
+    max-width: 100%;
+    background-color: rgba(162, 207, 255, 0.121);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: stretch;
+    padding: 10px;
+  }
+  .container .row {
+    width: 100%;
+    background-color: rgba(163, 181, 243, 0.3176470588);
+    padding: 20px;
+    gap: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: stretch;
+  }
+  .container .row .card {
+    margin: 5px;
+    width: 200px;
+    height: 350px;
+    border: 10px solid rgba(167, 183, 225, 0.27);
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;
+    gap: 10px;
+    background-color: rgba(18, 134, 229, 0.3607843137);
+  }
+  .container .row .card-img-top {
+    height: 50%;
+    object-fit: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .container .row .card-body {
+    height: 50%;
+    background-color: rgba(223, 217, 255, 0.3450980392);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: rgb(34, 34, 34);
+    text-shadow: 2px 3px 3px rgb(240, 240, 240);
+    font-family: "indie flower";
+    font-size: 60px;
+  }
+  .container .row .card-body .btn {
+    background-color: rgb(72, 212, 255);
+    color: white;
+    text-shadow: 2px 2px 3px rgb(188, 201, 249);
+    font-family: arial;
+    font-size: 18px;
+    border: 3px solid rgba(45, 99, 156, 0.144);
+  }
+  
+  footer {
+    background-color: rgba(79, 150, 244, 0.453);
+    width: 100%;
+    max-height: 6%;
+    padding: 5px;
+    position: fixed;
+    bottom: 0;
+    font-size: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+  footer .red {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(176, 215, 231, 0.545);
+    border-radius: 15px;
+    height: 48px;
+    flex-shrink: 0;
+    width: 45%;
+    padding: 10px;
+    gap: 10px;
+    margin: 10px;
+  }
+  footer .red .icon {
+    height: 37px;
+  }
+  footer .redes {
+    flex-shrink: 0;
+    box-sizing: border-box;
+    max-height: 50px;
+    padding: 5px;
+    border-radius: 10px;
+    width: 60%;
+    background-color: rgba(218, 248, 255, 0.591);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    text-shadow: 2px 2px 2px white;
+    font-family: "borel";
+    font-size: 10px;
+    font-size: 70%;
+  }
+  footer .redes h4 {
+    margin-top: 12px;
+    font-size: 10px;
+  }
+  
+  @media (min-width: 480px) {
+    footer {
+      height: 10%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+    }
+    footer .red {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      background-color: rgba(196, 242, 255, 0.554);
+      width: 40%;
+      height: 70px;
+      text-decoration: none;
+    }
+    footer .red .redes {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100px;
+      width: 63%;
+      background-color: rgba(204, 239, 244, 0.597);
+      font-size: 11px;
+      padding: 20px;
+      color: black;
+      text-shadow: 2px 2px 2px white;
+      font-family: "borel";
+      font-size: 10px;
+    }
+    footer .red .redes h4 {
+      margin-top: 20px;
+      font-size: 15px;
+    }
+  }
+  .text-home {
+    background-color: rgba(132, 156, 243, 0.425);
+    padding: 15px;
+  }
+  .text-home:hover {
+    transform: skewY(5deg);
+    transition: all 2s;
+  }
+  .text-home h2 {
+    background-color: rgba(0, 255, 255, 0.4);
+  }
+  .text-home p {
+    background-color: rgba(0, 170, 255, 0.625);
+  }
+  
+  aside {
+    background-color: rgba(172, 205, 249, 0.835);
+    padding: 10px;
+    margin: 10px;
+    margin-bottom: 58px;
+  }
+  aside .blog {
+    margin: 15px;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  .container-pr {
+    max-width: 100%;
+    object-fit: contain;
+    background-color: rgba(125, 198, 238, 0.298);
+  }
+  .container-pr .row-pr {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    object-fit: contain;
+  }
+  .container-pr .card-pr {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;
+    width: 300px;
+    border: 10px solid rgba(167, 208, 225, 0.473);
+    background-color: rgba(85, 0, 255, 0.199);
+    object-fit: contain;
+  }
+  .container-pr .card-img-pr {
+    height: 40%;
+    object-fit: contain;
+    margin: 10px;
+  }
+  .container-pr .card-img-pr-1 {
+    border-radius: 10px;
+    height: 80%;
+    margin: 10px;
+  }
+  
+  .container-ct {
+    background-color: rgba(0, 89, 255, 0.214);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 3px 3px 3px red;
+    width: 100%;
+  }
+  .container-ct table {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 3px 3px 3px red;
+    width: 100%;
+  }
+  .container-ct table .buy {
+    width: 100%;
+  }
+  @media (max-width: 550px) {
+    .container-ct table {
+      max-width: 80%;
+    }
+    .container-ct table tr {
+      max-width: 200px;
+    }
+    .container-ct table td {
+      max-width: 100%;
+    }
+    .container-ct table td img {
+      max-width: 100px;
+      height: 100px;
+    }
+  }
+  @media (max-width: 300px) {
+    .container-ct table {
+      max-width: 80%;
+      font-size: 10px;
+    }
+    .container-ct table tr {
+      max-width: 100px;
+    }
+    .container-ct table td {
+      max-width: 100%;
+    }
+    .container-ct table td img {
+      max-width: 100px;
+      height: 100px;
+    }
+  }
+  .container-ct tr {
+    width: 100%;
+    background-color: rgba(108, 232, 220, 0.521);
+    padding: 10px;
+    gap: 10px;
+    border: 3px 3px 3px red;
+  }
+  .container-ct tr th {
+    padding: 5px;
+    border: 3px 3px 3px red;
+    width: 100%;
+  }
+  .container-ct tr td {
+    background-color: rgba(81, 112, 221, 0.302);
+    padding: 10px;
+    border: 2px 2px 3px black;
+    width: 80%;
+  }
+  
+  .gps {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .gps-img {
+    margin: 20px;
+    width: 95%;
+  }
+  
+  @media (min-width: 1024px) {
+    .vestidos {
+      width: 100%;
+    }
+    .vestidos .container-pr {
+      max-width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: stretch;
+    }
+    .vestidos .container-pr .row-pr {
+      background-color: rgba(255, 188, 188, 0.611);
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .vestidos .container-pr .row-pr .card-pr {
+      height: 350px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: stretch;
+    }
+  }
+  .viajes-img {
+    width: 90%;
+  }
+  .viajes-img-1 {
+    height: 500px;
+  }
+  
+  .cont-viajes {
+    background-color: rgba(0, 255, 255, 0.276);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    padding-left: 30px;
+  }
+  
+  .box-viajes {
+    background-color: rgba(89, 103, 232, 0.349);
+    padding: 20px;
+    margin: 20px;
+  }
+  
+  .viajes-img-1 {
+    width: 90%;
+    height: auto;
+  }
+  
+  @media (min-width: 1024px) {
+    .viajes-img {
+      height: 400px;
+      width: auto;
+    }
+    .viajes-img-1 {
+      width: 30%;
+      height: auto;
+    }
+    .cont-viajes-1 {
+      background-color: rgba(0, 255, 255, 0.276);
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      padding-left: 30px;
+    }
+  }
+  .auto {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 153, 255, 0.439);
+    padding: 20px;
+    gap: 30px;
+  }
+  .auto p {
+    background-color: rgba(160, 191, 231, 0.6);
+    padding: 25px;
+    font-size: 18px;
+    line-height: 2;
+  }
+  .auto-type {
+    padding: 30px;
+  }
+  .auto-type ul {
+    background-color: rgba(69, 144, 174, 0.74);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.5;
+  }
+  .auto-type ul li {
+    background-color: rgba(5, 22, 57, 0.474);
+    font-size: 10px;
+    margin: 20px;
+    padding: 2px;
+    color: white;
+    text-shadow: 3px 3px 5px black;
+    font-family: "dancing script";
+    font-size: 40px;
+  }
+  .auto-img {
+    width: 50%;
+  }
+  
+  .pelis {
+    background-color: rgba(250, 235, 215, 0.509);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+  .pelis-text {
+    background-color: rgba(0, 149, 255, 0.599);
+    padding: 25px;
+    border-radius: 20px;
+  }
+  .pelis-img {
+    width: 60%;
+  }
+  .pelis-type {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+  @media (min-width: 750px) {
+    .pelis-type ul {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: stretch;
+      gap: 50px;
+    }
+  }
+  
+  .contacto {
+    margin-bottom: 70px;
+  }
+
+  .product-card {
+    width: 15%;
+    margin-right: 15px;
+    background-color: rgba(64, 144, 255, 0.57);
+    padding: 10px;
+    border-radius: 7px;
+    display: flex; /* Agregar flexbox */
+    flex-direction: column;
+    height: 350px;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.product-card img {
+    height: 30px;
+    max-height: 150px; /* Establecer la altura máxima de la imagen */
+    width: auto; /* Permitir que el ancho se ajuste automáticamente para mantener la proporción */
+    object-fit: contain; /* Esto asegurará que la imagen se ajuste dentro del contenedor manteniendo su relación de aspecto */
+    background-color: rgb(221, 236, 255);
+    padding: 5px;
+    border-radius: 7px;
+    align-items: center;
+    background-color: rgb(221, 236, 255);
+    padding: 5px;
+    border-radius: 7px;
+}
+
+.product-card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+}
+.product-card-text {
+    /* Tamaño de fuente para el texto */
+    margin-bottom: 0.3rem; /* Reducir el margen inferior */
+    justify-content: space-around;
+    text-align: center;
+
+}
+
+
+.comprarpremium{
+    background-color: rgba(59, 170, 255, 0.81);
+}
+
+.card-title{
+    background-color: rgba(103, 186, 255, 0.796);
+}
+
+.pricepremium{
+    background-color: rgb(127, 206, 255);
+    border-radius: 10px;
+    padding: 5px;
+}
+  /*# sourceMappingURL=styles.css.map */
+  

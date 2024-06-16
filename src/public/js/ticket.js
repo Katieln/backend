@@ -58,6 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(error => {
         console.error('Error al obtener los tickets:', error);
-        alert('Error al obtener los tickets');
+     
     });
 });
