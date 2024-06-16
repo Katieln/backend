@@ -626,8 +626,8 @@
 .product-card img {
     height: 30px;
     max-height: 150px; /* Establecer la altura máxima de la imagen */
-    width: auto; /* Permitir que el ancho se ajuste automáticamente para mantener la proporción */
-    object-fit: contain; /* Esto asegurará que la imagen se ajuste dentro del contenedor manteniendo su relación de aspecto */
+    /* Permitir que el ancho se ajuste automáticamente para mantener la proporción */
+    object-fit: cover; /* Esto asegurará que la imagen se ajuste dentro del contenedor manteniendo su relación de aspecto */
     background-color: rgb(221, 236, 255);
     padding: 5px;
     border-radius: 7px;
