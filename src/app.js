@@ -6,19 +6,19 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const flash = require('connect-flash');
-const db = require('./config/db.config');
+const db = require('./backend/config/db.config');
 const mongoose = require('mongoose');
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
-const {createHash} = require('../src/utils/bcrypt')
+const {createHash} = require('./backend/utils/bcrypt')
 const passport = require('passport')
-const initializePassport = require('./config/passport.config')
+const initializePassport = require('./backend/config/passport.config')
 const GitHubStrategy = require('passport-github2').Strategy;
 const multer = require('multer')
 const path = require('path');
 const nodemailer = require('nodemailer')
 const cookieParser = require('cookie-parser');
-const authMiddleware = require('./middlewares/authMiddleware');
+const authMiddleware = require('./backend/middlewares/authMiddleware');
 
 
 const http = require('http');
@@ -50,7 +50,7 @@ app.use(passport.session())
 app.use(flash());
 
 // Middleware
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/frontend/public'));
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
@@ -71,7 +71,7 @@ const handlebars = require('express-handlebars')
 app.engine('handlebars', handlebars.engine())
 app.set('view engine', 'handlebars')
 app.set('views', __dirname+'/')
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'frontend/views'));
 
 //Public
 app.use(express.static(path.join(__dirname, 'public')));
@@ -81,16 +81,16 @@ app.use('/public/thumbnails', express.static('thumbnails'));
 
 // Import Routes
 const mongo = require('mongoose')
-const productsRouter = require('./routes/products.router');
-const cartRouter = require('./routes/cart.router');
-const chatRouter = require('./routes/chat.router');
-const sessionsrouter = require('./routes/sessions.router');
-const authRoutes = require('./routes/auth.router');
-const mailRouter = require('./routes/mail.router');
-const userRouter = require('./routes/user.router')
-const ticketRouter = require('./routes/ticket.router')
-const viewsRouter = require('./routes/views.router')
-const emailticket = require('./routes/emailticket.router')
+const productsRouter = require('./backend/routes/products.router');
+const cartRouter = require('./backend/routes/cart.router');
+const chatRouter = require('./backend/routes/chat.router');
+const sessionsrouter = require('./backend/routes/sessions.router');
+const authRoutes = require('./backend/routes/auth.router');
+const mailRouter = require('./backend/routes/mail.router');
+const userRouter = require('./backend/routes/user.router')
+const ticketRouter = require('./backend/routes/ticket.router')
+const viewsRouter = require('./backend/routes/views.router')
+const emailticket = require('./backend/routes/emailticket.router')
 
 
 // Rutas
