@@ -22,22 +22,22 @@ const transport = nodemailer.createTransport({
 
 router.get('/send', async (req, res) => {
     try {
-        const imagePath = path.join(__dirname, 'image', 'laptop.jpg');
+        const imagePath = path.join(__dirname, 'image', 'imgMail.jpg');
         const emailUser = req.query.emailUser; 
 
         let result = await transport.sendMail({
-            from: 'Luna mktiielove@gmail.com',
+            from: 'Luna.Store mktiielove@gmail.com',
             to: emailUser,
             subject: 'Correo de bienvenida',
             html: `
             <div> 
-                <h1>Bienvenid@ Gracias por tu compra</h1>
-                <img src="cid:laptop"/>
+                <h1>Bienvenid@ a Luna.Store 🦄 </h1>
+                <img src="cid:imgMail"/>
             </div>`,
             attachments: [{
-                filename: 'laptop.jpg',
+                filename: 'imgMail.jpg',
                 path: imagePath,
-                cid: 'laptop'
+                cid: 'imgMail'
             }]
         });
 
