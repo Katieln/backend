@@ -16,14 +16,15 @@
 
   <div id="error-message" class="mt-3 text-danger"></div>
 
-<a class=" btn btn-primary btntocart" href="/api/view/cart">Ir a cart! 🚀</a>
+  <a class=" btn btn-primary btntocart" href="/api/view/cart">Ir a cart! 🚀</a>
 
-    <h1 class="TitlePage">Products</h1>
-  </div>
+  <h1 class="TitlePage">Products</h1>
+</div>
 
-  <div id="messageContainer" class="respComprar"></div>
+<div id="messageContainer" class="respComprar"></div>
 
-  <div class="form-group">
+<div class="filtrprods">
+  <div class="form-group eachfilter">
     <label for="categorySelect">Filtrar por categoría:</label>
     <select id="categorySelect" class="form-control">
       <option value="">Todas las categorías</option>
@@ -33,26 +34,28 @@
       <option value="tecnología">Tecnología</option>
     </select>
   </div>
-  <div>
-    <label for="minPriceInput">Min Price:</label>
-    <input type="number" id="minPriceInput" placeholder="Min Price">
-  </div>
-  <div>
-    <label for="maxPriceInput">Max Price:</label>
-    <input type="number" id="maxPriceInput" placeholder="Max Price">
-  </div>
-  <div>
-    <label for="sortSelect">Sort By:</label>
-    <select id="sortSelect">
-      <option value="none">No Sorting</option>
-      <option value="priceAsc">Price: Low to High</option>
-      <option value="priceDesc">Price: High to Low</option>
-    </select>
-  </div>
-  <button id="filterButton" class="btn btn-outline-info">Aplicar filtro</button>
 
 
-  <div id="misprods" class="row"></div>
+<div class="eachfilter">
+  <label for="minPriceInput">Min Price:</label>
+  <input type="number" id="minPriceInput" placeholder="Min Price">
+</div>
+<div class="eachfilter">
+  <label for="maxPriceInput">Max Price:</label>
+  <input type="number" id="maxPriceInput" placeholder="Max Price">
+</div>
+<div class="eachfilter">
+  <label for="sortSelect">Sort By:</label>
+  <select id="sortSelect">
+    <option value="none">No Sorting</option>
+    <option value="priceAsc">Price: Low to High</option>
+    <option value="priceDesc">Price: High to Low</option>
+  </select>
+</div class="eachfilter">
+<button id="filterButton" class="btn btn-outline-info filterButton">Aplicar filtro</button>
+</div>
+
+<div id="misprods" class="row"></div>
 </div>
 
 <script src="/js/products.js"></script>

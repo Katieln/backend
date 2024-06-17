@@ -35,3 +35,23 @@ body {
   .nav-item:hover{
 background-color: rgba(204, 242, 251, 0.475);
   }
+
+  .filtrprods{
+    background-color: rgb(36, 56, 105);
+    color: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .filterButton{
+    background-color: rgb(64, 107, 214);
+    color: rgb(255, 255, 255);
+  }
+
+  .eachfilter{
+    margin: 10px;
+  }
