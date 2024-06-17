@@ -57,6 +57,37 @@ class CartService {
         await cart.save();
         return cart;
     }
+
+
+    async removeFromCart(userId, productId) {
+        const user = await User.findById(userId);
+        if (!user) {
+            throw new Error('Usuario no encontrado');
+        }
+
+        let cart = await Cart.findOne({ userId: userId });
+        if (!cart) {
+            throw new Error('Carrito no encontrado');
+        }
+
+        const item = cart.items.find(item => item.product.equals(productId));
+        if (!item) {
+            throw new Error('Producto no encontrado en el carrito');
+        }
+
+        item.quantity -= 1;
+        item.totalPrice -= item.price;
+        if (item.quantity <= 0) {
+            cart.items = cart.items.filter(item => !item.product.equals(productId));
+        }
+
+        cart.total = cart.items.reduce((total, item) => total + item.totalPrice, 0);
+
+        await cart.save();
+        return cart;
+    }
 }
+
+
 
 module.exports = new CartService();

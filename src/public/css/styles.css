@@ -295,9 +295,10 @@ flex-direction: column;
     
 }
 .btnProfile{
-    background-color: rgb(150, 211, 255);
+    background-color: rgb(137, 203, 251);
     color: black;
-    border-color: rgb(133, 200, 255);
+    border-color: rgb(97, 182, 251);
+    border-width: 3px;
 }
 
 .checkUser{
