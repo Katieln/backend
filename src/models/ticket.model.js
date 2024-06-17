@@ -1,3 +1,4 @@
+const { string } = require('joi');
 const mongoose = require('mongoose');
 
 const ticketSchema = new mongoose.Schema({
@@ -7,6 +8,10 @@ const ticketSchema = new mongoose.Schema({
         required: true
     },
     email:{
+        type: String,
+        required: true
+    },
+    address:{
         type: String,
         required: true
     },

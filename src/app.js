@@ -20,6 +20,7 @@ const nodemailer = require('nodemailer')
 const cookieParser = require('cookie-parser');
 const authMiddleware = require('./middlewares/authMiddleware');
 
+
 const http = require('http');
 const server = http.createServer(app);
 
@@ -89,6 +90,7 @@ const mailRouter = require('./routes/mail.router');
 const userRouter = require('./routes/user.router')
 const ticketRouter = require('./routes/ticket.router')
 const viewsRouter = require('./routes/views.router')
+const emailticket = require('./routes/emailticket.router')
 
 
 // Rutas
@@ -101,6 +103,7 @@ app.use('/api/mail', mailRouter);
 app.use('/api/ticket', ticketRouter);
 app.use('/api/user', userRouter)
 app.use('/api/view', viewsRouter)
+app.use('/api/emailticket', emailticket)
 
 
 

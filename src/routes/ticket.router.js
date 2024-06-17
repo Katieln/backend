@@ -62,6 +62,7 @@ router.post('/complete-purchase', async (req, res) => {
             userId: user._id,
             cartId: cart._id,
             email: user.email,
+            method: user.method,
             address: user.address,
             products: products,
             totalPrice: totalPrice

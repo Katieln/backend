@@ -9,6 +9,7 @@ const path = require('path')
 
 
 
+
 const transport = nodemailer.createTransport({
     service: 'gmail',
     port: 587,
@@ -47,8 +48,6 @@ router.get('/send', async (req, res) => {
         res.status(500).send('Error al enviar el correo');
     }
 });
-
-
 
 
 
