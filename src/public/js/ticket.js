@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </ul>
                     <h5>Total Price: $${ticket.totalPrice}</h5>
                      <p>Email: ${ticket.email}</p>
+                      <p>Dirección de envio: ${ticket.address}</p>
                   
                     </div>
                     

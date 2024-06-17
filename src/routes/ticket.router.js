@@ -62,6 +62,7 @@ router.post('/complete-purchase', async (req, res) => {
             userId: user._id,
             cartId: cart._id,
             email: user.email,
+            address: user.address,
             products: products,
             totalPrice: totalPrice
         });
@@ -137,42 +138,6 @@ router.get('/show', async (req, res) => {
     }
 });
 
-
-// **********  Ruta direccion ********** //
-
-router.post('/save-address', (req, res) => {
-    const { address } = req.body;
-    if (!address) {
-        return res.status(400).json({ success: false, message: 'Dirección es requerida' });
-    }
-
-   
-    req.session.address = address;
-
-    res.json({ success: true, message: 'Dirección guardada correctamente' });
-});
-
-router.get('/confirm-address', (req, res) => {
-   
-    res.sendFile(path.join(__dirname, 'path/to/confirm-address.html'));
-});
-
-router.get('/api/get-address', (req, res) => {
-    const address = req.session.address;
-    if (!address) {
-        return res.status(404).json({ success: false, message: 'Dirección no encontrada' });
-    }
-    res.json({ success: true, address });
-});
-
-
-//********************************************************//
-
-
-//********************************************************//
-
-
-//********************************************************//
 
 
 

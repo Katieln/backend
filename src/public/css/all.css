@@ -1,0 +1,37 @@
+body {
+    border-color: blue;
+    background-color: rgb(245, 247, 255);
+}
+
+
+.headerStyle{
+    background-color: rgb(61, 97, 189);
+    padding: 5px;
+  }
+
+
+.nav-link{
+    color: aliceblue;
+}
+  
+.titlestore{
+    color: rgb(216, 237, 255);
+    text-shadow: 4px 4px 6px rgb(134, 204, 255);
+    font-family: "dancing script";
+    font-size: 30px;
+}
+
+  /* .titlestore{
+    color: rgb(42, 106, 255);
+    text-shadow: 3px 3px 6px rgb(78, 193, 255);
+
+  } */
+
+.userconnect{
+    margin: 10px;
+    border-color: aqua;
+}
+  
+  .nav-item:hover{
+background-color: rgba(204, 242, 251, 0.475);
+  }

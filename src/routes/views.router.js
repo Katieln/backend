@@ -42,6 +42,11 @@ router.get('/mail', (req, res) => {
   });
 
   // vista de premiumContent
+  router.get('/admin', isAuthenticated, authorize(['admin']),(req, res) => {
+    res.render('admin');
+});
+
+  // vista de premiumContent
 router.get('/premium', isAuthenticated, authorize(['admin', 'premium']),(req, res) => {
     res.render('premium');
 });

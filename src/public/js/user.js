@@ -1,5 +1,34 @@
 
-  ///******* autenticacion *********///
+document.addEventListener('DOMContentLoaded', () => {
+  fetch('/api/user/profile', {
+      method: 'GET',
+      credentials: 'include' // Incluye cookies con la solicitud
+  })
+  .then(response => {
+      if (!response.ok) {
+          const profileContainer = document.getElementById('profile');
+      profileContainer.innerHTML =
+      `<div class="userConnected"> 
+         <h6> Usuario No conectado </h6>
+      </div>`;
+      }
+      return response.json();
+  })
+  .then(data => {
+
+      cartId = data.cart.id;
+      // Renderizar los datos del perfil del usuario
+      const profileContainer = document.getElementById('profile');
+      profileContainer.innerHTML = `
+      <div class="userConnected"> 
+         <h6>* Username: ${data.profile.username} _ ${data.profile.role} _ ${data.profile.method}  </h6>
+         <h6> * Email: ${data.profile.email} </h6>
+
+      </div>`;})})
+ 
+ 
+ 
+ ///******* autenticacion *********///
 
   async function checkAuthentication() {
     try {

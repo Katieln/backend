@@ -11,7 +11,6 @@ io.on('connection', (socket)=>{
 
 
   socket.on('new-message', (data)=>{
-    console.log(data)
     messages.push(data)
     io.sockets.emit('messages-all', messages)
     ModeloChat.create({

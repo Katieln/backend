@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const discountedPrice = prod.price * 0.8; // Descuento del 20%
     
             boxprods.innerHTML += `
-            
+        
                 <div class="product-card col-md-4" >
                     <img src="${prod.image}" class="card-img-top" alt="${prod.title}" />
                     <h5 class="card-title text-center">${prod.title.toUpperCase()}</h5>
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         Price Premium (20% off)</h6>
                 
                     </div>
-                </div>
+
              
             `;
         });

@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .then(response => {
         if (!response.ok) {
-            const profileContainer = document.getElementById('profile');
+            const profileContainer = document.getElementById('usercart');
         profileContainer.innerHTML =
         `<div class="userConnected"> 
            <h6> Usuario No conectado </h6>
@@ -21,11 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         cartId = data.cart.id;
         // Renderizar los datos del perfil del usuario
-        const profileContainer = document.getElementById('profile');
+        const profileContainer = document.getElementById('usercart');
         profileContainer.innerHTML = `
-        <div class="userConnected"> 
-           <h6>* Username: ${data.profile.username} _ ${data.profile.role} _ ${data.profile.method}  </h6>
-           <h6> * Email: ${data.profile.email} </h6>
+        <div class="usercart"> 
+           <p>* Username: ${data.profile.username} _ ${data.profile.role} _ ${data.profile.method}  </p>
+           <p> * Email: ${data.profile.email} </p>
+           <p> * Dirección de envio: ${data.profile.address} </p>
 
         </div>`;
         // <h6> * Address: ${data.profile.address }  </h6>    

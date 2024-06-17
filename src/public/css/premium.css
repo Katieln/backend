@@ -81,7 +81,7 @@
   }
   
   nav {
-    background-color: rgba(67, 119, 223, 0.6470588235);
+    background-color: rgba(53, 101, 199, 0.647);
   }
   nav ul:hover {
     transition: all 1s;
@@ -120,7 +120,7 @@
   }
 
   .headerStyle{
-    background-color: rgba(0, 81, 255, 0.192);
+    background-color: rgba(104, 151, 255, 0.76);
   }
   
   @media (min-width: 480px) {
@@ -610,7 +610,7 @@
   }
 
   .product-card {
-    width: 15%;
+    width: 200px;
     margin-right: 15px;
     background-color: rgba(64, 144, 255, 0.57);
     padding: 10px;
@@ -651,6 +651,7 @@
     text-align: center;
 
 }
+
 
 
 .comprarpremium{

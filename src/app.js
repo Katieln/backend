@@ -117,7 +117,7 @@ io.on('connection', (socket)=>{
   socket.emit('wellcome', 'Hola cliente, bienvenido') // mensaje para enviar del servidor al frontend o cliente
 
   socket.on('new-message', (data)=>{
-    console.log(data)
+
     messages.push(data)
     io.sockets.emit('messages-all', messages)
   })

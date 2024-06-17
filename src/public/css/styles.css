@@ -50,7 +50,7 @@
 }
 
 .cart-card{
-background-color: rgb(243, 248, 255);
+background-color: rgb(192, 218, 255);
 mask-border-width: 30px;
 width: 600px;
 display: flex;
@@ -260,7 +260,7 @@ flex-direction: column;
 }
 
 .ticket{
-    background-color: rgb(248, 248, 248);
+    background-color: rgb(255, 255, 255);
     padding: 10px;
     padding-left: 20px;
     margin-top: 30px;
@@ -271,22 +271,69 @@ flex-direction: column;
     /* align-items: center; */
 }
 
-.headerStyle{
-    background-color: rgba(178, 212, 253, 0.166);
-    padding: 5px;
-  }
 
-  .titlestore{
-    color: rgb(6, 139, 255);
-    text-shadow: 3px 3px 6px rgb(72, 180, 202);
-    font-family: "dancing script";
-    font-size: 30px;
-  }
 
-  /* .navbarStyle{
-    font-family: "indie flower";
-  } */
+  .profileinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+
+}
+
+.usercart{
+    display: flex;
+    flex-direction: column;
+}
+
+.btnProfile:hover{
+    background-color: rgba(138, 226, 255, 0.818);
+    color: black;
+    border-color: rgb(128, 196, 252);
+    
+}
+.btnProfile{
+    background-color: rgba(170, 204, 255, 0.459);
+    color: black;
+    border-color: rgb(133, 200, 255);
+}
+
+.checkUser{
+    margin: 30px;
+    background-color: rgba(228, 238, 247, 0.171);
+
+}
+
+.checkCompra{
+    margin: 30px;
+    background-color: rgba(228, 238, 247, 0.205);
+
+}
+.confirmPurchase{
+    font-size: 20px;
+}
+
+.btntocart{
+
+    margin: 10px;
+    background-color: rgba(32, 132, 255, 0.907);
   
-  .nav-item:hover{
-background-color: rgba(204, 242, 251, 0.475);
-  }
+    border-color: rgb(42, 127, 255);
+    border-width: 4px;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+
+}
+.editProfileFrom{
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+            gap: 20px; /* Espacio entre las cajas */
+}
+
+.btneditProfile {
+    width: 200px;
+    background-color: rgba(107, 139, 255, 0.416);
+    color: rgb(255, 255, 255);
+    border-color: rgb(207, 233, 255);
+}

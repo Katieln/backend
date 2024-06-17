@@ -1,0 +1,25 @@
+body {
+    background-color: #061329; /* Cambia el color de fondo a gris claro */
+    color: aliceblue;
+
+}
+h1{
+    font-size: 50px;
+}
+.btnbackend{
+    font-size: 15px;
+    margin: 15px;
+}
+
+.headerStyle{
+    background-color: rgb(17, 36, 86);
+}
+
+.nav-link{
+    color: aliceblue;
+}
+
+.titlestore{
+    color: rgb(146, 204, 255);
+    text-shadow: rgb(248, 248, 255);
+}

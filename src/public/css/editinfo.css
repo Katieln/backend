@@ -1,0 +1,8 @@
+
+
+.container {
+    border: 5px solid #1c316f; /* Añade un borde de 2px sólido de color negro */
+    padding: 30px; /* Añade un relleno al contenedor para separar el contenido del borde */
+    background-color: rgb(11, 15, 38);
+    color: aliceblue;
+}

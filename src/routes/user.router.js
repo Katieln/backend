@@ -57,31 +57,44 @@ router.get('/profile', isAuthenticated, authorize(['user', 'admin', 'premium']),
 
 
 
-
-router.post('/update-address', async (req, res) => {
+router.put('/profile', isAuthenticated, async (req, res) => {
     try {
-        const { userId, newAddress } = req.body;
+        const userId = req.user._id;
+        const { username, email, address } = req.body;
 
-        // Buscar el usuario por su ID y actualizar la dirección
+        // Validaciones adicionales si es necesario
+        if (!username || !email || !address) {
+            return res.status(400).json({ msg: 'Todos los campos son obligatorios' });
+        }
+
         const updatedUser = await User.findByIdAndUpdate(
             userId,
-            { address: newAddress },
-            { new: true } // Devuelve el documento actualizado
+            { username, email, address },
+            { new: true, runValidators: true }
         );
 
         if (!updatedUser) {
-            return res.status(404).json({ error: 'Usuario no encontrado' });
+            return res.status(404).json({ msg: 'Usuario no encontrado' });
         }
 
-        res.status(200).json({
-            msg: 'Dirección actualizada correctamente',
-            data: updatedUser
+        res.json({
+            msg: 'Perfil actualizado exitosamente',
+            profile: {
+                id: updatedUser._id,
+                username: updatedUser.username,
+                email: updatedUser.email,
+                method: updatedUser.method,
+                address: updatedUser.address,
+                role: updatedUser.role
+            }
         });
     } catch (err) {
-        console.error('Error al actualizar la dirección del usuario:', err);
-        res.status(500).json({ error: 'Error interno del servidor' });
+        console.error(err);
+        res.status(500).json({ msg: 'Error al actualizar el perfil del usuario' });
     }
 });
+
+
 
 
 // Ruta para obtener todos los usuarios

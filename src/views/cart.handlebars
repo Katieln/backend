@@ -3,10 +3,11 @@
 <div class="container">
         <div class="container mt-5">
 
-                <h4>Usuario Conectado:</h4>
+                <h4>Información de Usuario:</h4>
 
 
-                <div id="profile" class="usersession"></div>
+                <div id="usercart" class="usercart"></div>
+
         </div>
 
         <div class="container">
@@ -20,18 +21,23 @@
 
         <div id="totalPrice" class="totalPrice"></div>
 
-       <div id="addressFormContainer" class="addressFormContainer"></div>
-
-       <div id="addressInfo" class="addressInfo"></div>
-       
-{{!-- 
-         <a href="/api/view/ticket" class="btn btn-primary fincompra">Confirmar Compra</a> --}}
-
-         <button id="confirmPurchase" type="submit" class="btn btn-primary">Confirmar Compra</button>
+        
+        <div class="checkUser">
+              
+                <a class=" btn btn-primary btnProfile" href="/api/view/profile">Actualizar datos de usuario </a>
+                  <p>Revisa tu información de usuario si quieres corregir algun dato dale click a Actualizar datos de usuario! </p>
+        </div>
 
 
-         
-        {{!-- <div id="confirmarCompra" class="confirmarCompra"></div> --}}
+
+        <div class="checkCompra">
+           
+                <button id="confirmPurchase" type="submit" class="btn btn-primary confirmPurchase">Confirmar Compra😎</button>
+                     <p>Si toda la información de envío y datos de comrpa estan correctos puedes confirmar compra y generar
+                        tu ticket!</p>
+        </div>
+
+
 
 </div>
 </div>
