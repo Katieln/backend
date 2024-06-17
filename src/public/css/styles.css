@@ -50,14 +50,13 @@
 }
 
 .cart-card{
-background-color: rgb(255, 255, 255);
-mask-border-width: 30px;
+background-color: rgb(233, 242, 255);
 width: 600px;
 display: flex;
 flex-direction: row;
 justify-content: space-around;
 margin-bottom: 10px;
-padding: 5px;
+padding: 8px;
 border-radius: 10px;
 }
 
@@ -294,7 +293,7 @@ flex-direction: column;
     
 }
 .btnProfile{
-    background-color: rgba(170, 204, 255, 0.459);
+    background-color: rgb(150, 211, 255);
     color: black;
     border-color: rgb(133, 200, 255);
 }
