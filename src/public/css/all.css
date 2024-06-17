@@ -1,6 +1,10 @@
 body {
 
-    background-color: rgb(167, 197, 255);
+    background-image: url(https://w0.peakpx.com/wallpaper/592/194/HD-wallpaper-rain-of-stars-stars-fantasy-moon-blue.jpg) ;
+    background-color: rgb(207, 221, 245);
+    background-size: contain ;
+    background-blend-mode: overlay;
+
 }
 
 

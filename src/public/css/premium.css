@@ -9,6 +9,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background-blend-mode: unset;
   }
   
   h1 {
