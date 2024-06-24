@@ -19,40 +19,38 @@ router.post('/remove-from-cart', (req, res) => cartController.removeFromCart(req
   
 
 
-
-
-
-
-/*************************************************************/
-
 // Obtener los productos del carrito para un usuario 
 
-router.get('/ByUser', isAuthenticated, async (req, res) => {
-    try {
-        const userId = req.cookies.userId;
+router.get('/ByUser', isAuthenticated, cartController.getCartByUser);
 
-        const cart = await Cart.findOne({ userId: userId }).populate('items.product');
+// router.get('/ByUser', isAuthenticated, async (req, res) => {
+//     try {
+//         const userId = req.cookies.userId;
 
-        if (!cart) {
-            return res.status(404).json({ msg: 'Carrito no encontrado' });
-        }
+//         const cart = await Cart.findOne({ userId: userId }).populate('items.product');
 
-        const productsInCart = cart.items.map(item => ({
-            product: item.product ? item.product.title : "Producto no encontrado",
-            quantity: item.quantity,
-            image: item.image,
-            price: item.price,
-            totalPrice: item.price * item.quantity
-        }));
+//         if (!cart) {
+//             return res.status(404).json({ msg: 'Carrito no encontrado' });
+//         }
 
-        const cartTotal = cart.total;
+//         const productsInCart = cart.items.map(item => ({
+//             product: item.product ? item.product.title : "Producto no encontrado",
+//             quantity: item.quantity,
+//             image: item.image,
+//             price: item.price,
+//             totalPrice: item.price * item.quantity
+//         }));
 
-        res.json({ products: productsInCart, total: cartTotal });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ msg: 'Error al obtener productos del carrito' });
-    }
-});
+//         const cartTotal = cart.total;
+
+//         res.json({ products: productsInCart, total: cartTotal });
+//     } catch (err) {
+//         console.error(err);
+//         res.status(500).json({ msg: 'Error al obtener productos del carrito' });
+//     }
+// });
+
+
 
 
 router.get('/:cid', isAuthenticated, async (req, res) => {

@@ -37,7 +37,25 @@ class CartController {
             res.status(500).json({ error: error.message });
         }
     }
-    
+
+    async getCartByUser (req, res) {
+        try {
+            const userId = req.cookies.userId;
+            const cartData = await cartService.getCartByUserId(userId);
+            res.json(cartData);
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ msg: 'Error al obtener productos del carrito' });
+        }
+    };
+
 }
+
+    
+    
+
+
+
+
 
 module.exports = new CartController();

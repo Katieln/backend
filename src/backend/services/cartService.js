@@ -86,6 +86,24 @@ class CartService {
         await cart.save();
         return cart;
     }
+
+     async getCartByUserId (userId) {
+        const cart = await Cart.findOne({ userId }).populate('items.product');
+        if (!cart) {
+            throw new Error('Carrito no encontrado');
+        }
+    
+        const productsInCart = cart.items.map(item => ({
+            product: item.product ? item.product.title : "Producto no encontrado",
+            quantity: item.quantity,
+            image: item.image,
+            price: item.price,
+            totalPrice: item.price * item.quantity
+        }));
+    
+        return { products: productsInCart, total: cart.total };
+    };
+
 }
 
 

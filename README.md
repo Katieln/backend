@@ -1,6 +1,6 @@
 # Mi Aplicación de Productos
 
-Esta es una aplicación web simple para mostrar una lista de productos. Los usuarios pueden ver los detalles de cada producto y agregarlos a su carrito de compras.
+Esta es una aplicación web e-commerce para comprar productos agregarlos al cart y pedirlo para que los envien a domicilio. Los usuarios pueden ver los productos, agregarlos a su carrito de compras y generar un ticket de compra.
 
 ## Características
 
@@ -8,7 +8,7 @@ Esta es una aplicación web simple para mostrar una lista de productos. Los usua
 - Permite a los usuarios ver detalles completos de cada producto.
 - Los usuarios pueden agregar productos a su carrito de compras.
 - Los usuarios pueden ver los productos en su carrito y la cantidad total a pagar.
-- Funcionalidad básica de autenticación para usuarios registrados.
+- Funcionalidad de autenticación para usuarios registrados.
 - Interfaz de usuario limpia y fácil de usar.
 
 ## Tecnologías Utilizadas
@@ -44,61 +44,43 @@ Esta es una aplicación web simple para mostrar una lista de productos. Los usua
 
 ## Estructura
 
+# ** Frontend -> public & views
+# ** Backend -> config, controllers, middlewares, models, routes, services, socket, utils
+
+## Backend:
+
 # **Config**
 db.config.js -> conexion a la base de datos mongodb
 multer.config.js -> config de multer para imagenes 
 passport.config.js -> config passport-local passport github autenticación
 
-# **Controllers**
-auth.controller.js -> controlador de autenticación
-
 # **Middlewares**
 authMiddleware.js -> middleware de autenticación
 
+# ** socket **
+socket.js -> sservidor de WebSocket que permite la comunicación en tiempo real entre clientes y servidor, y maneja la persistencia de los mensajes en una base de datos.
+
+# ** Utils **
+bcrypt.js -> encriptar contraseña
+
 # **Models**
-cart.model.js -> modelo de cart; caracteristicas de datos para el cart
-pruduct.model.js -> modelo de pruduct; caracteristicas de datos para el pruduct
-ticket.model.js -> modelo de ticket; caracteristicas de datos para el ticket
-user.model.js -> modelo de user; caracteristicas de datos para el user
+*cart.model.js -> modelo de cart; caracteristicas de datos para el cart
+*pruduct.model.js -> modelo de pruduct; caracteristicas de datos para el pruduct
+*ticket.model.js -> modelo de ticket; caracteristicas de datos para el ticket
+*user.model.js -> modelo de user; caracteristicas de datos para el user
 
+# **Controllers** Manejan la lógica de las solicitudes y respuestas HTTP
+auth.controller.js -> controlador de autenticación
+cart.controller.js -> logica para agregar y quitar products del cart
+user.controller.js -> logica para obtener datos del usuario y su cart
+ticket.controller.js -> logica para crear ticket y obtenerlo
 
-//******************************** *** Public *** ********************************//
-# % **Public** Frontend
+# ** services ** Contienen la lógica de negocio y las interacciones con la base de datos
+cartService.js -> interaccion con la base de datos del cart para agregar y quitar productos del cart
+userService.js -> interacción con la base de datos del user y su cart
+userService.js -> interacción con la base de datos del ticket y datos de usuario
 
-  ~ **css**
-  Estilos diseño Frontend 
-
-  ~ **images**
-  Imagenes guardadas de productos, desde postman por la ruta: router.post(/api/prods/upload)
-
-  ~ **js**
-  cart.js -> 
-        /// *** Obtener datos y cart del usuario autenticado *** // fetch' (/api/user/profile', method: 'GET' credentials: 'include')
-        /// *** Renderizar los productos del carrito *** //
-        /// *** Funcionalidad Boton increase *** //  fetch ('/api/cart/add-to-cart', method: 'POST)
-        /// *** Funcionalidad Boton decrease *** //  fetch ('/api/cart/remove-from-cart', method: 'POST)
-        /// *** Boton Confirmar Compra Total **** //  fetch ('/api/ticket/complete-purchase', method: 'POST credentials: 'include') elimina cantidad stock de products
-
-  chat.js -> codigo cliente-forntend  para el chat con websocket 
-
-  mail.js -> codigo cliente-forntend para el envio del email ingresado en input 
-
-  products.js ->  
-        /// *** Renderizar todos los productos filtrados por category price y ordenados sortBy *** //
-        /// *** Boton comprar *** /// fetch ('/api/cart/add-to-cart', method: 'POST)
-
-  ticket.js -> 
-       /// *** Renderizar ticket *** /// fetch ('/api/ticket/show', method: 'POST)
-       
-  user.js -> 
-       /// *** Mostrar en pantalla autenticación *** /// fetch ('/api/auth/check-auth')
-       /// *** mostrar usuario no conectado logout *** // fetch ('/api/auth/logout', method: 'GET credentials: 'include')
-       /// *** mostrar usuario conectado github *** // window.location.href = '/api/auth/github'
-
-
-//*******************************************************************************//
-
-# **Routes**
+# **Routes** Definen los endpoints y asocian los controladores a estos
  ~ image -> carpeta iamgen envio de email
 auth.router.js ->
 * ruta post: register, login
@@ -143,8 +125,46 @@ user.router.js ->
 views.router.js ->
 * ruta get: profile, register, cart, products, ticket, mail, 
 
-# ** Utils **
-bcrypt.js -> encriptar contraseña
+
+## Frontend:
+
+
+//******************************** *** Public *** ********************************//
+# % **Public** 
+
+  ~ **css**
+  Estilos diseño Frontend 
+
+  ~ **images**
+  Imagenes guardadas de productos, desde postman por la ruta: router.post(/api/prods/upload)
+
+  ~ **js**
+  cart.js -> 
+        /// *** Obtener datos y cart del usuario autenticado *** // fetch' (/api/user/profile', method: 'GET' credentials: 'include')
+        /// *** Renderizar los productos del carrito *** //
+        /// *** Funcionalidad Boton increase *** //  fetch ('/api/cart/add-to-cart', method: 'POST)
+        /// *** Funcionalidad Boton decrease *** //  fetch ('/api/cart/remove-from-cart', method: 'POST)
+        /// *** Boton Confirmar Compra Total **** //  fetch ('/api/ticket/complete-purchase', method: 'POST credentials: 'include') elimina cantidad stock de products
+
+  chat.js -> codigo cliente-forntend  para el chat con websocket 
+
+  mail.js -> codigo cliente-forntend para el envio del email ingresado en input 
+
+  products.js ->  
+        /// *** Renderizar todos los productos filtrados por category price y ordenados sortBy *** //
+        /// *** Boton comprar *** /// fetch ('/api/cart/add-to-cart', method: 'POST)
+
+  ticket.js -> 
+       /// *** Renderizar ticket *** /// fetch ('/api/ticket/show', method: 'POST)
+       
+  user.js -> 
+       /// *** Mostrar en pantalla autenticación *** /// fetch ('/api/auth/check-auth')
+       /// *** mostrar usuario no conectado logout *** // fetch ('/api/auth/logout', method: 'GET credentials: 'include')
+       /// *** mostrar usuario conectado github *** // window.location.href = '/api/auth/github'
+
+
+//*******************************************************************************//
+
 
 # ** Views **
 html de vistas

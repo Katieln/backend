@@ -90,7 +90,7 @@ const mailRouter = require('./backend/routes/mail.router');
 const userRouter = require('./backend/routes/user.router')
 const ticketRouter = require('./backend/routes/ticket.router')
 const viewsRouter = require('./backend/routes/views.router')
-const emailticket = require('./backend/routes/emailticket.router')
+// const emailticket = require('./backend/routes/emailticket.router')
 
 
 // Rutas
@@ -103,7 +103,7 @@ app.use('/api/mail', mailRouter);
 app.use('/api/ticket', ticketRouter);
 app.use('/api/user', userRouter)
 app.use('/api/view', viewsRouter)
-app.use('/api/emailticket', emailticket)
+// app.use('/api/emailticket', emailticket)
 
 
 

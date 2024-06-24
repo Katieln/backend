@@ -8,104 +8,18 @@ const Product = require('../models/product.model')
 const initializeAuth = require('../middlewares/authMiddleware');
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
+const ticketController = require('../controllers/ticket.controller');
 
-
-
+const { isAuthenticated, authorize } = initializeAuth();
 
 
 
 
 // Router para completar la compra
-// Router para completar la compra
-router.post('/complete-purchase', async (req, res) => {
-    const session = await mongoose.startSession();
-    session.startTransaction();
-    try {
-        const userId = req.user._id;
-        const user = await User.findById(userId).session(session);
-        const cart = await Cart.findOne({ userId: userId }).populate('items.product').session(session);
 
-        if (!user) {
-            await session.abortTransaction();
-            session.endSession();
-            return res.status(404).json({ error: 'Usuario no encontrado' });
-        }
-
-        if (!cart) {
-            await session.abortTransaction();
-            session.endSession();
-            return res.status(404).json({ error: 'Carrito no encontrado' });
-        }
-
-        // Verificar si ya existe un ticket para este carrito
-        const existingTicket = await Ticket.findOne({ userId: userId, cartId: cart._id }).session(session);
-        if (existingTicket) {
-            await session.abortTransaction();
-            session.endSession();
-            return res.status(400).json({ error: 'Ya existe un ticket para este carrito' });
-        }
-
-        // Crear el objeto de productos para el ticket
-        const products = cart.items.map(item => ({
-            productId: item.product._id,
-            title: item.product.title,
-            quantity: item.quantity,
-            price: item.product.price,
-            total: item.quantity * item.product.price
-        }));
-
-        // Calcular el precio total del ticket
-        const totalPrice = cart.items.reduce((sum, item) => sum + (item.quantity * item.product.price), 0);
-
-        // Crear un nuevo documento de Ticket
-        const newTicket = new Ticket({
-            userId: user._id,
-            cartId: cart._id,
-            email: user.email,
-            method: user.method,
-            address: user.address,
-            products: products,
-            totalPrice: totalPrice
-        });
-
-        // Guardar el ticket en la base de datos
-        await newTicket.save({ session });
-
-        // Reducir el stock de cada producto en el carrito
-        for (const item of cart.items) {
-            const product = await Product.findById(item.product._id).session(session);
-            if (product.stock < item.quantity) {
-                await session.abortTransaction();
-                session.endSession();
-                return res.status(400).json({ error: 'Stock insuficiente para el producto: ' + product.title });
-            }
-            product.stock -= item.quantity;
-            await product.save({ session });
-        }
-
-        // Vaciar el carrito después de confirmar la compra
-        cart.items = [];
-        cart.total = 0;
-        await cart.save({ session });
-
-        await session.commitTransaction();
-        session.endSession();
-        res.status(200).json({ success: true, message: 'Compra completada y stock reducido correctamente' });
-    } catch (err) {
-        await session.abortTransaction();
-        session.endSession();
-        console.error('Error al completar la compra:', err);
-
-    }
-});
+router.post('/complete-purchase', ticketController.completePurchase);
 
 
-
-
-
-
-
-// **********  Ruta obtener Tickets Backend ********** //
 
 // ********** Ruta obtener Tickets Backend ********** //
 router.get('/show', async (req, res) => {

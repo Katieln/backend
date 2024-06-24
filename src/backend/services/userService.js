@@ -1,18 +1,76 @@
-// // services/user.service.js
-// const User = require('../models/user.model');
+// services/cartService.js
+const User = require('../models/user.model');
+const Product = require('../models/product.model');
+const Cart = require('../models/cart.model');
 
-// async function findOrCreateUser(profile) {
-//   const { id, username, emails } = profile;
-//   const email = emails[0].value;
-//   let user = await User.findOne({ githubId: id });
+class UserService{
+    async getUserProfileAndCart (userId, productId){
+        const user = await User.findById(userId);
+    if (!user) {
+        throw new Error('Usuario no encontrado');
+    }
 
-//   if (!user) {
-//     user = await User.create({ githubId: id, username, email });
-//   }
+    const cart = await Cart.findOne({ userId }).populate('items.product');
+    
+    const profileData = {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        method: user.method,
+        address: user.address,
+        role: user.role
+    };
 
-//   return user;
-// }
+    let cartData = {
+        id: null,
+        items: [],
+        total: 0,
+    };
 
-// module.exports = {
-//   findOrCreateUser
-// };
+    if (cart) {
+        cartData = {
+            id: cart.id,
+            items: cart.items,
+            total: cart.total,
+        };
+    }
+
+    return {
+        profile: profileData,
+        cart: cartData
+    };
+};
+
+async updateUserProfile (userId, username, email, address) {
+    if (!username || !email || !address) {
+        throw new Error('Todos los campos son obligatorios');
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+        userId,
+        { username, email, address },
+        { new: true, runValidators: true }
+    );
+
+    if (!updatedUser) {
+        throw new Error('Usuario no encontrado');
+    }
+
+    return {
+        id: updatedUser._id,
+        username: updatedUser.username,
+        email: updatedUser.email,
+        method: updatedUser.method,
+        address: updatedUser.address,
+        role: updatedUser.role
+    };
+};
+
+async getAllUsers ()  {
+    return await User.find();
+};
+
+
+    }
+
+    module.exports = new UserService();
