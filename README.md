@@ -2,6 +2,10 @@
 
 Esta es una aplicación web e-commerce estructurada por capas y definida la programacion backend y frontend, para comprar productos agregarlos al cart y pedirlo para que envien a domicilio. Los usuarios pueden ver los productos, agregarlos a su carrito de compras y generar un ticket de compra.
 
+npm init -y
+npm i express
+npm start
+
 http://localhost:8080/api/view/register
 registrarse primero.
 http://localhost:8080/api/auth/login
