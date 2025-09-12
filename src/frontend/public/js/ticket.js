@@ -1,26 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
     fetch('/api/ticket/show', {
         method: 'GET',
-        credentials: 'include' // Incluye cookies con la solicitud
+        credentials: 'include'
     })
     .then(response => response.json())
     .then(data => {
-        // Verifica si se encontraron tickets para el usuario
+        
         if (data.ticket.length === 0) {
             const ticketContainer = document.getElementById('ticketContainer');
             ticketContainer.innerHTML = '<p>No se encontraron tickets para este usuario</p>';
         } else {
-            // Renderiza los tickets en el DOM
+          
             const ticketContainer = document.getElementById('ticketContainer');
             data.ticket.forEach(ticket => {
                 const ticketElement = document.createElement('div');
                 ticketElement.classList.add('ticket');
-                // Agrega el ID del ticket como un atributo de datos al contenedor del ticket
+             
                 ticketElement.dataset.ticketId = ticket._id;
 
                 const createdAt = new Date(ticket.createdAt).toLocaleString();
 
-                // Construye el contenido del ticket
+           
                 const ticketInfo = `
                     <div class="ticket">
                         <div class="ticketid">

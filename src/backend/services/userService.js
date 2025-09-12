@@ -4,6 +4,12 @@ const Product = require('../models/product.model');
 const Cart = require('../models/cart.model');
 
 class UserService{
+
+    async findUserById  (userId)  {
+        return await User.findById(userId);
+    };
+    
+
     async getUserProfileAndCart (userId, productId){
         const user = await User.findById(userId);
     if (!user) {

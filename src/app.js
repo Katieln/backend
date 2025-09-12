@@ -76,7 +76,7 @@ app.set('views', path.join(__dirname, 'frontend/views'));
 //Public
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/public/images', express.static('images'));
-app.use('/public/thumbnails', express.static('thumbnails'));
+
 
 
 // Import Routes
@@ -90,7 +90,7 @@ const mailRouter = require('./backend/routes/mail.router');
 const userRouter = require('./backend/routes/user.router')
 const ticketRouter = require('./backend/routes/ticket.router')
 const viewsRouter = require('./backend/routes/views.router')
-// const emailticket = require('./backend/routes/emailticket.router')
+
 
 
 // Rutas
@@ -103,7 +103,6 @@ app.use('/api/mail', mailRouter);
 app.use('/api/ticket', ticketRouter);
 app.use('/api/user', userRouter)
 app.use('/api/view', viewsRouter)
-// app.use('/api/emailticket', emailticket)
 
 
 
@@ -128,7 +127,7 @@ io.on('connection', (socket)=>{
 
 
 // Iniciar el servidor
-const PORT = 8080 || process.env.PORT
+        const PORT = 8080 || process.env.PORT
 
 server.listen(PORT, async () => {
     console.log(`Servidor corriendo en el puerto: ${PORT}`);

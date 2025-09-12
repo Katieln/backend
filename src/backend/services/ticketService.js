@@ -6,6 +6,8 @@ const Cart = require('../models/cart.model');
 const Ticket = require('../models/ticket.model')
 
 class TicketService{
+
+
     async completePurchase  (userId) {
         const session = await mongoose.startSession();
         session.startTransaction();
@@ -80,6 +82,39 @@ class TicketService{
         }
     };
     
+
+
+    async getTicketsForUser  (userId)  {
+        try {
+            const user = await User.findById(userId);
+            if (!user) {
+                return { status: 404, data: { msg: 'Usuario no encontrado' } };
+            }
+    
+            const tickets = await Ticket.find({ userId: userId }).sort({ createdAt: -1 }).populate('products.productId');
+            if (tickets.length === 0) {
+                return { status: 404, data: { msg: 'No se encontraron tickets para este usuario' } };
+            }
+    
+            return {
+                status: 200,
+                data: {
+                    profile: {
+                        id: user._id,
+                        username: user.username,
+                        email: user.email,
+                        method: user.method,
+                        address: user.address,
+                    },
+                    ticket: tickets
+                }
+            };
+        } catch (err) {
+            console.error('Error al obtener los tickets:', err);
+            return { status: 500, data: { error: 'Error interno del servidor' } };
+        }
+    };
+
 
     }
 

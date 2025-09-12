@@ -1,5 +1,6 @@
 // controllers/cartController.js
 const ticketService = require('../services/ticketService');
+const userService = require('../services/userService');
 
 class TicketController {
    async completePurchase  (req, res) {
@@ -11,6 +12,22 @@ class TicketController {
     }
 };
 
+ async showTickets (userId) {
+    return await Ticket.find({ userId: userId })
+        .sort({ createdAt: -1 })
+        .populate('products.productId');
+};
+
+  async showTickets  (req, res)  {
+    try {
+        const userId = req.user._id;
+        const result = await ticketService.getTicketsForUser(userId);
+        res.status(result.status).json(result.data);
+    } catch (err) {
+        console.error('Error al obtener los tickets:', err);
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+};
 
 
 }

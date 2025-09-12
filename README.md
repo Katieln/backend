@@ -1,6 +1,14 @@
 # Mi Aplicación de Productos
 
-Esta es una aplicación web e-commerce para comprar productos agregarlos al cart y pedirlo para que los envien a domicilio. Los usuarios pueden ver los productos, agregarlos a su carrito de compras y generar un ticket de compra.
+Esta es una aplicación web e-commerce estructurada por capas y definida la programacion backend y frontend, para comprar productos agregarlos al cart y pedirlo para que envien a domicilio. Los usuarios pueden ver los productos, agregarlos a su carrito de compras y generar un ticket de compra.
+
+http://localhost:8080/api/view/register
+registrarse primero.
+http://localhost:8080/api/auth/login
+http://localhost:8080/api/view/products
+http://localhost:8080/api/view/cart
+
+
 
 ## Características
 
@@ -17,7 +25,6 @@ Esta es una aplicación web e-commerce para comprar productos agregarlos al cart
 - **Backend**: Node.js, Express.js
 - **Base de Datos**: MongoDB
 - **Autenticación**: Passport.js (Local y GitHub OAuth)
-- **Despliegue**: Heroku
 - **Dependencies**:    
     "bcrypt": "^5.1.1",
     "commander": "^12.1.0",
@@ -45,7 +52,7 @@ Esta es una aplicación web e-commerce para comprar productos agregarlos al cart
 ## Estructura
 
 # ** Frontend -> public & views
-# ** Backend -> config, controllers, middlewares, models, routes, services, socket, utils
+# ** Backend -> config, middlewares, socket, utils, models, controllers, services,routes.
 
 ## Backend:
 
@@ -74,11 +81,13 @@ auth.controller.js -> controlador de autenticación
 cart.controller.js -> logica para agregar y quitar products del cart
 user.controller.js -> logica para obtener datos del usuario y su cart
 ticket.controller.js -> logica para crear ticket y obtenerlo
+product.controller.js -> logica para crear nuevo producto y subir imagen del producto
 
 # ** services ** Contienen la lógica de negocio y las interacciones con la base de datos
 cartService.js -> interaccion con la base de datos del cart para agregar y quitar productos del cart
 userService.js -> interacción con la base de datos del user y su cart
-userService.js -> interacción con la base de datos del ticket y datos de usuario
+ticketService.js -> interacción con la base de datos del ticket y datos de usuario
+productService.js -> interacción con la base de datos products
 
 # **Routes** Definen los endpoints y asocian los controladores a estos
  ~ image -> carpeta iamgen envio de email

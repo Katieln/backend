@@ -23,32 +23,6 @@ router.post('/remove-from-cart', (req, res) => cartController.removeFromCart(req
 
 router.get('/ByUser', isAuthenticated, cartController.getCartByUser);
 
-// router.get('/ByUser', isAuthenticated, async (req, res) => {
-//     try {
-//         const userId = req.cookies.userId;
-
-//         const cart = await Cart.findOne({ userId: userId }).populate('items.product');
-
-//         if (!cart) {
-//             return res.status(404).json({ msg: 'Carrito no encontrado' });
-//         }
-
-//         const productsInCart = cart.items.map(item => ({
-//             product: item.product ? item.product.title : "Producto no encontrado",
-//             quantity: item.quantity,
-//             image: item.image,
-//             price: item.price,
-//             totalPrice: item.price * item.quantity
-//         }));
-
-//         const cartTotal = cart.total;
-
-//         res.json({ products: productsInCart, total: cartTotal });
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).json({ msg: 'Error al obtener productos del carrito' });
-//     }
-// });
 
 
 
@@ -74,54 +48,9 @@ router.get('/:cid', isAuthenticated, async (req, res) => {
         res.status(500).json({ msg: 'Error al obtener productos del carrito' });
     }
 });
+
 /*************************************************************/
 
-// Agregar producto al carrito
-router.post('/pr', async (req, res) => {
-    try {
-        const { productId, userId } = req.body;
-        const requestedQuantity = req.body.quantity || 1; 
-
-       
-        if (!mongoose.Types.ObjectId.isValid(userId)) {
-            return res.status(400).send({ error: 'ID de usuario inválido' });
-        }
-
-        const product = await Product.findById(productId);
-
-        if (!product) {
-            return res.status(404).send({ error: 'El producto no existe' });
-        }
-
-        if (product.stock < requestedQuantity) {
-            return res.status(400).send({ error: 'Stock insuficiente para el producto' });
-        }
-
-        let cart = await Cart.findOne({ userId: userId });
-
-        if (!cart) {
-            cart = new Cart({ userId: userId, items: [] });
-        }
-
-        const existingItemIndex = cart.items.findIndex(item => item.product.equals(productId));
-
-        if (existingItemIndex !== -1) {
-            const newQuantity = cart.items[existingItemIndex].quantity + requestedQuantity;
-            if (product.stock < newQuantity) {
-                return res.status(400).send({ error: 'Stock insuficiente para la cantidad solicitada' });
-            }
-            cart.items[existingItemIndex].quantity = newQuantity;
-        } else {
-            cart.items.push({ product: productId, quantity: requestedQuantity });
-        }
-
-        await cart.save();
-
-        res.status(201).send({ msg: 'Producto agregado correctamente al carrito' });
-    } catch (err) {
-        res.status(500).send({ error: err.message });
-    }
-});
 
 
 
