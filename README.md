@@ -1,6 +1,6 @@
-# Mi Aplicación de Productos
+# My Product Application
 
-Esta es una aplicación web e-commerce estructurada por capas y definida la programacion backend y frontend, para comprar productos agregarlos al cart y pedirlo para que envien a domicilio. Los usuarios pueden ver los productos, agregarlos a su carrito de compras y generar un ticket de compra.
+This is a layered-architecture e-commerce web application with both backend and frontend programming. It allows users to purchase products, add them to the cart, and request home delivery. Users can browse products, add them to their shopping cart, and generate a purchase ticket.
 
 npm init -y
 npm i express
@@ -14,16 +14,21 @@ http://localhost:8080/api/view/cart
 
 
 
-## Características
+## Features
 
-- Muestra una lista de productos con su imagen, título, descripción y precio.
-- Permite a los usuarios ver detalles completos de cada producto.
-- Los usuarios pueden agregar productos a su carrito de compras.
-- Los usuarios pueden ver los productos en su carrito y la cantidad total a pagar.
-- Funcionalidad de autenticación para usuarios registrados.
-- Interfaz de usuario limpia y fácil de usar.
+-Displays a list of products with their image, title, description, and price.
 
-## Tecnologías Utilizadas
+-Allows users to view full details of each product.
+
+-Users can add products to their shopping cart.
+
+-Users can view the products in their cart and the total amount to pay.
+
+-Authentication functionality for registered users.
+
+-Clean and user-friendly interface.
+
+## Technologies Used
 
 - **Frontend**: HTML, CSS, JavaScript
 - **Backend**: Node.js, Express.js
@@ -53,7 +58,7 @@ http://localhost:8080/api/view/cart
 
 //*******************************************************************************//
 
-## Estructura
+## Structure
 
 # ** Frontend -> public & views
 # ** Backend -> config, middlewares, socket, utils, models, controllers, services,routes.
@@ -61,56 +66,57 @@ http://localhost:8080/api/view/cart
 ## Backend:
 
 # **Config**
-db.config.js -> conexion a la base de datos mongodb
-multer.config.js -> config de multer para imagenes 
-passport.config.js -> config passport-local passport github autenticación
+db.config.js → MongoDB database connection
+
+multer.config.js → Multer configuration for images
+
+passport.config.js → Passport Local & GitHub authentication config
 
 # **Middlewares**
-authMiddleware.js -> middleware de autenticación
+authMiddleware.js -> authentication middleware
 
 # ** socket **
-socket.js -> sservidor de WebSocket que permite la comunicación en tiempo real entre clientes y servidor, y maneja la persistencia de los mensajes en una base de datos.
+socket.js -> ebSocket server enabling real-time communication between clients and server, handling message persistence in the database.
 
 # ** Utils **
-bcrypt.js -> encriptar contraseña
+bcrypt.js → password encryption
 
 # **Models**
-*cart.model.js -> modelo de cart; caracteristicas de datos para el cart
-*pruduct.model.js -> modelo de pruduct; caracteristicas de datos para el pruduct
-*ticket.model.js -> modelo de ticket; caracteristicas de datos para el ticket
-*user.model.js -> modelo de user; caracteristicas de datos para el user
+*cart.model.js -> cart model; cart data structure
+*pruduct.model.js -> product model; product data structure
+*ticket.model.js -> ticket model; ticket data structure
+*user.model.js -> user model; user data structure
 
-# **Controllers** Manejan la lógica de las solicitudes y respuestas HTTP
-auth.controller.js -> controlador de autenticación
-cart.controller.js -> logica para agregar y quitar products del cart
-user.controller.js -> logica para obtener datos del usuario y su cart
-ticket.controller.js -> logica para crear ticket y obtenerlo
-product.controller.js -> logica para crear nuevo producto y subir imagen del producto
+# **Controllers** Handle HTTP request/response logic
+auth.controller.js -> authentication controller
+cart.controller.js -> logic for adding/removing products from the cart
+user.controller.js -> logic for retrieving user and cart data
+ticket.controller.js -> logic for creating and retrieving tickets
+product.controller.js -> logic for creating new products and uploading product images
 
-# ** services ** Contienen la lógica de negocio y las interacciones con la base de datos
-cartService.js -> interaccion con la base de datos del cart para agregar y quitar productos del cart
-userService.js -> interacción con la base de datos del user y su cart
-ticketService.js -> interacción con la base de datos del ticket y datos de usuario
-productService.js -> interacción con la base de datos products
+# ** services ** Business logic and DB interactions
+cartService.js -> cart DB interactions (add/remove products)
+userService.js -> user and cart DB interactions
+ticketService.js -> ticket and user DB interactions
+productService.js -> product DB interactions
 
-# **Routes** Definen los endpoints y asocian los controladores a estos
+# **Routes** Define endpoints and connect controllers
  ~ image -> carpeta iamgen envio de email
 auth.router.js ->
-* ruta post: register, login
-* ruta get: login, logout, github, checkauth
+* POST: register, login
+* GET: login, logout, GitHub, check-auth
 
 
 cart.router.js -> 
-* ruta post: add-to-cart, remove-from-cart, <-- estas son las rutas que se usan desde fetch en frontend
-* ruta post: /pr(agregar producto al cart backend)
-* ruta get: ByUser(obtener cart por usuario backend), :cid (obtener cart por cartID backend),
-* ruta put: :userId/product/:productId(Actualizar cantidad de un producto por usuerID en el cart backend), :cid(actualizar cart por cartID)
-* ruta delete: :userID(eliminar todos los productos del cart del usuario backend), :userId/product/:productId(eliminar un producto del cart de un usuairo backend)
+* POST: add-to-cart, remove-from-cart (used in frontend fetch calls)
+* POST: /pr (add product to cart backend)
+* GET: ByUser (get cart by user), :cid (get cart by cartID)
+* PUT: :userId/product/:productId (update product qty in cart by userID), :cid (update cart by cartID)
+* DELETE: :userId (delete all products in user’s cart), :userId/product/:productId (remove product from cart by user)
 
 
 chat.router.js ->
-* ruta get: chat 
-
+* GET: chat
 
 mail.router.js -> 
 * ruta get: /send email 
@@ -119,21 +125,21 @@ emailUser = req.query.emailUser -> public/mail.js y mail.handlebars
 
 
 products.router.js ->
-* ruta post: newPr (agregar producto a la tienda)
-* ruta put: upload (agregar imagen al prodcuto)
-* ruta get: allPr (obtener todos los products), prById/:id(obtner producto por su Id)
-* ruta delete: prById/:id (eliminar producto por su Id)
-* ruta put: prById/:id (actualizar info del producto por su Id)
+* post: newPr (add new product)
+* put: upload (add product image)
+* get: allPr (get all products), prById/:id (get product by ID)
+* delete: prById/:id (delete product by ID)
+* put: prById/:id (update product by ID)
 
 sessions.router.js -> 
 * ruta get: github
 
 ticket.router.js ->
-* ruta post: complete-purchase (crear ticket)
-* ruta get: show (obtener info del ticket)
+* ruta post: complete-purchase (create ticket)
+* ruta get: show (retrieve ticket info)
 
 user.router.js ->
-* ruta get: profile (obtener info del usuario, profile y cart), allU(obetenr info todos los usuarios)
+* ruta get: profile (user info, profile & cart), allU (all users info)
 
 views.router.js ->
 * ruta get: profile, register, cart, products, ticket, mail, 
@@ -146,11 +152,11 @@ views.router.js ->
 # % **Public** 
 
   ~ **css**
-  Estilos diseño Frontend 
+  frontend styles 
 
   ~ **images**
-  Imagenes guardadas de productos, desde postman por la ruta: router.post(/api/prods/upload)
-
+  product images (uploaded via Postman using /api/prods/upload)
+  
   ~ **js**
   cart.js -> 
         /// *** Obtener datos y cart del usuario autenticado *** // fetch' (/api/user/profile', method: 'GET' credentials: 'include')
